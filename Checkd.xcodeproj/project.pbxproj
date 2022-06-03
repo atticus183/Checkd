@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		571B7AFA284ABC71006BAEEB /* CheckdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7AF9284ABC71006BAEEB /* CheckdApp.swift */; };
-		571B7AFC284ABC71006BAEEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7AFB284ABC71006BAEEB /* ContentView.swift */; };
+		571B7AFC284ABC71006BAEEB /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7AFB284ABC71006BAEEB /* ListView.swift */; };
 		571B7AFE284ABC73006BAEEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 571B7AFD284ABC73006BAEEB /* Assets.xcassets */; };
 		571B7B01284ABC73006BAEEB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 571B7B00284ABC73006BAEEB /* Preview Assets.xcassets */; };
 		571B7B03284ABC73006BAEEB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B02284ABC73006BAEEB /* Persistence.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		571B7AF6284ABC71006BAEEB /* Checkd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		571B7AF9284ABC71006BAEEB /* CheckdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckdApp.swift; sourceTree = "<group>"; };
-		571B7AFB284ABC71006BAEEB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		571B7AFB284ABC71006BAEEB /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		571B7AFD284ABC73006BAEEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		571B7B00284ABC73006BAEEB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		571B7B02284ABC73006BAEEB /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -93,12 +93,13 @@
 		571B7AF8284ABC71006BAEEB /* Checkd */ = {
 			isa = PBXGroup;
 			children = (
-				571B7AF9284ABC71006BAEEB /* CheckdApp.swift */,
-				571B7AFB284ABC71006BAEEB /* ContentView.swift */,
 				571B7AFD284ABC73006BAEEB /* Assets.xcassets */,
-				571B7B02284ABC73006BAEEB /* Persistence.swift */,
-				571B7B04284ABC73006BAEEB /* Checkd.xcdatamodeld */,
+				571B7AF9284ABC71006BAEEB /* CheckdApp.swift */,
+				571B7B2B284AC0F6006BAEEB /* CoreData */,
+				571B7B2D284AC10A006BAEEB /* Models */,
 				571B7AFF284ABC73006BAEEB /* Preview Content */,
+				571B7B2C284AC100006BAEEB /* Repositories */,
+				571B7B28284AC0D1006BAEEB /* Views */,
 			);
 			path = Checkd;
 			sourceTree = "<group>";
@@ -117,6 +118,53 @@
 				571B7B0F284ABC73006BAEEB /* CheckdTests.swift */,
 			);
 			path = CheckdTests;
+			sourceTree = "<group>";
+		};
+		571B7B28284AC0D1006BAEEB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				571B7B29284AC0D8006BAEEB /* ListView */,
+				571B7B2A284AC0E9006BAEEB /* TodoListView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		571B7B29284AC0D8006BAEEB /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+				571B7AFB284ABC71006BAEEB /* ListView.swift */,
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
+		571B7B2A284AC0E9006BAEEB /* TodoListView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TodoListView;
+			sourceTree = "<group>";
+		};
+		571B7B2B284AC0F6006BAEEB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				571B7B02284ABC73006BAEEB /* Persistence.swift */,
+				571B7B04284ABC73006BAEEB /* Checkd.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		571B7B2C284AC100006BAEEB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		571B7B2D284AC10A006BAEEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,7 +299,7 @@
 			files = (
 				571B7B03284ABC73006BAEEB /* Persistence.swift in Sources */,
 				571B7B06284ABC73006BAEEB /* Checkd.xcdatamodeld in Sources */,
-				571B7AFC284ABC71006BAEEB /* ContentView.swift in Sources */,
+				571B7AFC284ABC71006BAEEB /* ListView.swift in Sources */,
 				571B7AFA284ABC71006BAEEB /* CheckdApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +465,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -446,6 +495,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
