@@ -83,6 +83,6 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ListView().environment(\.managedObjectContext, CoreDataStack.preview.container.viewContext)
     }
 }

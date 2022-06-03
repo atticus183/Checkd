@@ -11,7 +11,7 @@
 		571B7AFC284ABC71006BAEEB /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7AFB284ABC71006BAEEB /* ListView.swift */; };
 		571B7AFE284ABC73006BAEEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 571B7AFD284ABC73006BAEEB /* Assets.xcassets */; };
 		571B7B01284ABC73006BAEEB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 571B7B00284ABC73006BAEEB /* Preview Assets.xcassets */; };
-		571B7B03284ABC73006BAEEB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B02284ABC73006BAEEB /* Persistence.swift */; };
+		571B7B03284ABC73006BAEEB /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B02284ABC73006BAEEB /* CoreDataStack.swift */; };
 		571B7B06284ABC73006BAEEB /* Checkd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B04284ABC73006BAEEB /* Checkd.xcdatamodeld */; };
 		571B7B10284ABC73006BAEEB /* CheckdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B0F284ABC73006BAEEB /* CheckdTests.swift */; };
 		571B7B2F284AC3B1006BAEEB /* ListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B2E284AC3B1006BAEEB /* ListEntity.swift */; };
@@ -41,7 +41,7 @@
 		571B7AFB284ABC71006BAEEB /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		571B7AFD284ABC73006BAEEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		571B7B00284ABC73006BAEEB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		571B7B02284ABC73006BAEEB /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		571B7B02284ABC73006BAEEB /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		571B7B05284ABC73006BAEEB /* Checkd.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Checkd.xcdatamodel; sourceTree = "<group>"; };
 		571B7B0B284ABC73006BAEEB /* CheckdTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckdTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		571B7B0F284ABC73006BAEEB /* CheckdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckdTests.swift; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		571B7B2B284AC0F6006BAEEB /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				571B7B02284ABC73006BAEEB /* Persistence.swift */,
+				571B7B02284ABC73006BAEEB /* CoreDataStack.swift */,
 				571B7B04284ABC73006BAEEB /* Checkd.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -304,7 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				571B7B31284AC3BC006BAEEB /* TodoEntity.swift in Sources */,
-				571B7B03284ABC73006BAEEB /* Persistence.swift in Sources */,
+				571B7B03284ABC73006BAEEB /* CoreDataStack.swift in Sources */,
 				571B7B06284ABC73006BAEEB /* Checkd.xcdatamodeld in Sources */,
 				571B7B2F284AC3B1006BAEEB /* ListEntity.swift in Sources */,
 				571B7AFC284ABC71006BAEEB /* ListView.swift in Sources */,
