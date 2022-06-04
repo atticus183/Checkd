@@ -14,14 +14,15 @@ class CoreDataStack {
 
     private(set) var modelName: String = "Checkd"
 
+    var viewContext: NSManagedObjectContext { container.viewContext }
+
     init(inMemory: Bool = false) {
         self.inMemory = inMemory
     }
 
     // MARK: NSPersistentContainer
     lazy var container: NSPersistentContainer = {
-        let container: NSPersistentContainer
-        container = NSPersistentContainer(name: modelName)
+        let container = NSPersistentContainer(name: modelName)
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

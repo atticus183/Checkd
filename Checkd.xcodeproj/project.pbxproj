@@ -16,6 +16,9 @@
 		571B7B10284ABC73006BAEEB /* CheckdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B0F284ABC73006BAEEB /* CheckdTests.swift */; };
 		571B7B2F284AC3B1006BAEEB /* ListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B2E284AC3B1006BAEEB /* ListEntity.swift */; };
 		571B7B31284AC3BC006BAEEB /* TodoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B30284AC3BB006BAEEB /* TodoEntity.swift */; };
+		571B7B33284ACB9D006BAEEB /* ListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B32284ACB9D006BAEEB /* ListRepository.swift */; };
+		571B7B35284ACBA6006BAEEB /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B34284ACBA6006BAEEB /* TodoRepository.swift */; };
+		571B7B37284ACBBE006BAEEB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B36284ACBBE006BAEEB /* Repository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		571B7B15284ABC73006BAEEB /* CheckdUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckdUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		571B7B2E284AC3B1006BAEEB /* ListEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEntity.swift; sourceTree = "<group>"; };
 		571B7B30284AC3BB006BAEEB /* TodoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntity.swift; sourceTree = "<group>"; };
+		571B7B32284ACB9D006BAEEB /* ListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRepository.swift; sourceTree = "<group>"; };
+		571B7B34284ACBA6006BAEEB /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
+		571B7B36284ACBBE006BAEEB /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +166,9 @@
 		571B7B2C284AC100006BAEEB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				571B7B32284ACB9D006BAEEB /* ListRepository.swift */,
+				571B7B36284ACBBE006BAEEB /* Repository.swift */,
+				571B7B34284ACBA6006BAEEB /* TodoRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -308,7 +317,10 @@
 				571B7B06284ABC73006BAEEB /* Checkd.xcdatamodeld in Sources */,
 				571B7B2F284AC3B1006BAEEB /* ListEntity.swift in Sources */,
 				571B7AFC284ABC71006BAEEB /* ListView.swift in Sources */,
+				571B7B35284ACBA6006BAEEB /* TodoRepository.swift in Sources */,
+				571B7B33284ACB9D006BAEEB /* ListRepository.swift in Sources */,
 				571B7AFA284ABC71006BAEEB /* CheckdApp.swift in Sources */,
+				571B7B37284ACBBE006BAEEB /* Repository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
