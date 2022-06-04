@@ -14,7 +14,7 @@ final class ListViewViewModel: ObservableObject {
 
     private var cancellables: Set<AnyCancellable> = []
 
-    let listRepository: ListRepository
+    private let listRepository: ListRepository
 
     init(listRepository: ListRepository = DefaultListRepository()) {
         self.listRepository = listRepository
@@ -25,10 +25,6 @@ final class ListViewViewModel: ObservableObject {
             .sink(receiveCompletion: { _ in }) { [weak self] hasChanges in
             self?.fetchLists()
         }.store(in: &cancellables)
-    }
-
-    func addList(name: String) {
-        listRepository.add(name: name)
     }
 
     func deleteList(at indexSet: IndexSet) {

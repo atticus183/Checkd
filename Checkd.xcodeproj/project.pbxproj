@@ -21,6 +21,8 @@
 		571B7B37284ACBBE006BAEEB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B36284ACBBE006BAEEB /* Repository.swift */; };
 		571B7B39284AE81F006BAEEB /* ListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B38284AE81F006BAEEB /* ListViewViewModel.swift */; };
 		571B7B3B284AECBD006BAEEB /* AddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B3A284AECBD006BAEEB /* AddButtonView.swift */; };
+		571B7B5D284BCF80006BAEEB /* CreateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B5C284BCF7F006BAEEB /* CreateListView.swift */; };
+		57564FD7284BD98500EADCC1 /* CreateListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57564FD6284BD98500EADCC1 /* CreateListViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		571B7B36284ACBBE006BAEEB /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		571B7B38284AE81F006BAEEB /* ListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewViewModel.swift; sourceTree = "<group>"; };
 		571B7B3A284AECBD006BAEEB /* AddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonView.swift; sourceTree = "<group>"; };
+		571B7B5C284BCF7F006BAEEB /* CreateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListView.swift; sourceTree = "<group>"; };
+		57564FD6284BD98500EADCC1 /* CreateListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 		571B7B28284AC0D1006BAEEB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				571B7B5B284BCF71006BAEEB /* CreateListView */,
 				571B7B29284AC0D8006BAEEB /* ListView */,
 				571B7B2A284AC0E9006BAEEB /* TodoListView */,
 				571B7B3A284AECBD006BAEEB /* AddButtonView.swift */,
@@ -186,6 +191,15 @@
 				571B7B30284AC3BB006BAEEB /* TodoEntity.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		571B7B5B284BCF71006BAEEB /* CreateListView */ = {
+			isa = PBXGroup;
+			children = (
+				571B7B5C284BCF7F006BAEEB /* CreateListView.swift */,
+				57564FD6284BD98500EADCC1 /* CreateListViewViewModel.swift */,
+			);
+			path = CreateListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,11 +333,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				571B7B31284AC3BC006BAEEB /* TodoEntity.swift in Sources */,
+				57564FD7284BD98500EADCC1 /* CreateListViewViewModel.swift in Sources */,
 				571B7B03284ABC73006BAEEB /* CoreDataStack.swift in Sources */,
 				571B7B06284ABC73006BAEEB /* Checkd.xcdatamodeld in Sources */,
 				571B7B39284AE81F006BAEEB /* ListViewViewModel.swift in Sources */,
 				571B7B2F284AC3B1006BAEEB /* ListEntity.swift in Sources */,
 				571B7AFC284ABC71006BAEEB /* ListView.swift in Sources */,
+				571B7B5D284BCF80006BAEEB /* CreateListView.swift in Sources */,
 				571B7B35284ACBA6006BAEEB /* TodoRepository.swift in Sources */,
 				571B7B33284ACB9D006BAEEB /* ListRepository.swift in Sources */,
 				571B7B3B284AECBD006BAEEB /* AddButtonView.swift in Sources */,

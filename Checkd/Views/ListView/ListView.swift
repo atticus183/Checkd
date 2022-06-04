@@ -10,13 +10,14 @@ import SwiftUI
 
 struct ListView: View {
     @StateObject var viewModel = ListViewViewModel()
+    @State private var showingCreateListView = false
 
     var body: some View {
         NavigationView {
             ZStack {
                 List {
                     ForEach(viewModel.lists, id: \.id) { list in
-                        NavigationLink(destination: Text("Todo View")) {
+                        NavigationLink(destination: Text("Todo")) {
                             ListRow(list: list)
                         }
                     }.onDelete { indexSet in
@@ -24,17 +25,16 @@ struct ListView: View {
                     }.onMove { indexSet, destination in
                         viewModel.moveList(from: indexSet, to: destination)
                     }
-
                 }
                 .listStyle(.insetGrouped)
 
                 VStack {
                     Spacer()
                     AddButtonView {
-                        withAnimation {
-                            viewModel.addList(name: "List# \(viewModel.lists.count)")
-                        }
-                    }
+                        showingCreateListView.toggle()
+                    }.sheet(isPresented: $showingCreateListView) {
+                        CreateListView()
+                    }.padding()
                 }
             }
             .toolbar {
@@ -64,7 +64,7 @@ struct ListRow: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct ListView_Previews: PreviewProvider {
     static var previews: some View {
         ListEntity.createForPreview()
         return ListView()
