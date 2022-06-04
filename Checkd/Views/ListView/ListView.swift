@@ -5,7 +5,6 @@
 //  Created by Josh R on 6/3/22.
 //
 
-import CoreData
 import SwiftUI
 
 struct ListView: View {
@@ -17,9 +16,7 @@ struct ListView: View {
             ZStack {
                 List {
                     ForEach(viewModel.lists, id: \.id) { list in
-                        NavigationLink(destination: Text("Todo")) {
-                            ListRow(list: list)
-                        }
+                        ListRow(list: list)
                     }.onDelete { indexSet in
                         viewModel.deleteList(at: indexSet)
                     }.onMove { indexSet, destination in
@@ -38,12 +35,16 @@ struct ListView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
                 }
             }
             .navigationTitle("Lists")
-        }.navigationViewStyle(StackNavigationViewStyle())   //fixes console errors
+        }
+        .navigationViewStyle(StackNavigationViewStyle())   //fixes console errors
+        .onAppear {
+            viewModel.fetchLists()
+        }
     }
 }
 

@@ -24,7 +24,6 @@ extension ListEntity {
     }
 }
 
-
 // MARK: `ListEntity`s for Preview
 
 extension ListEntity {
@@ -37,6 +36,12 @@ extension ListEntity {
         for list in listNames {
             repo.add(name: list)
         }
+    }
+
+    static func sampleList() -> ListEntity {
+        let repo = DefaultListRepository()
+        let list = repo.add(name: "Test List")
+        return list
     }
     #endif
 }

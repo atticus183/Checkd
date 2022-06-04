@@ -19,8 +19,6 @@ final class ListViewViewModel: ObservableObject {
     init(listRepository: ListRepository = DefaultListRepository()) {
         self.listRepository = listRepository
 
-        fetchLists()
-
         listRepository.repositoryHasChanges
             .sink(receiveCompletion: { _ in }) { [weak self] hasChanges in
             self?.fetchLists()

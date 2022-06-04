@@ -23,6 +23,8 @@
 		571B7B3B284AECBD006BAEEB /* AddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B3A284AECBD006BAEEB /* AddButtonView.swift */; };
 		571B7B5D284BCF80006BAEEB /* CreateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B5C284BCF7F006BAEEB /* CreateListView.swift */; };
 		57564FD7284BD98500EADCC1 /* CreateListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57564FD6284BD98500EADCC1 /* CreateListViewViewModel.swift */; };
+		57564FD9284BE50F00EADCC1 /* TodoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57564FD8284BE50F00EADCC1 /* TodoListView.swift */; };
+		57564FDB284BE55500EADCC1 /* TodoListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57564FDA284BE55500EADCC1 /* TodoListViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		571B7B3A284AECBD006BAEEB /* AddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonView.swift; sourceTree = "<group>"; };
 		571B7B5C284BCF7F006BAEEB /* CreateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListView.swift; sourceTree = "<group>"; };
 		57564FD6284BD98500EADCC1 /* CreateListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateListViewViewModel.swift; sourceTree = "<group>"; };
+		57564FD8284BE50F00EADCC1 /* TodoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListView.swift; sourceTree = "<group>"; };
+		57564FDA284BE55500EADCC1 /* TodoListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,8 @@
 		571B7B2A284AC0E9006BAEEB /* TodoListView */ = {
 			isa = PBXGroup;
 			children = (
+				57564FD8284BE50F00EADCC1 /* TodoListView.swift */,
+				57564FDA284BE55500EADCC1 /* TodoListViewViewModel.swift */,
 			);
 			path = TodoListView;
 			sourceTree = "<group>";
@@ -336,7 +342,9 @@
 				57564FD7284BD98500EADCC1 /* CreateListViewViewModel.swift in Sources */,
 				571B7B03284ABC73006BAEEB /* CoreDataStack.swift in Sources */,
 				571B7B06284ABC73006BAEEB /* Checkd.xcdatamodeld in Sources */,
+				57564FD9284BE50F00EADCC1 /* TodoListView.swift in Sources */,
 				571B7B39284AE81F006BAEEB /* ListViewViewModel.swift in Sources */,
+				57564FDB284BE55500EADCC1 /* TodoListViewViewModel.swift in Sources */,
 				571B7B2F284AC3B1006BAEEB /* ListEntity.swift in Sources */,
 				571B7AFC284ABC71006BAEEB /* ListView.swift in Sources */,
 				571B7B5D284BCF80006BAEEB /* CreateListView.swift in Sources */,

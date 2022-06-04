@@ -11,6 +11,7 @@ import Foundation
 protocol TodoRepository: Repository {
     @discardableResult func add(name: String, to list: ListEntity) -> TodoEntity
     func delete(todoEntity: TodoEntity)
+    func fetchTodos() -> [TodoEntity]
     @discardableResult func update(name: String, todoEntity: TodoEntity) -> TodoEntity
 }
 
@@ -39,6 +40,17 @@ final class DefaultTodoRepository: TodoRepository {
 
     func delete(todoEntity: TodoEntity) {
         coreDataStack.viewContext.delete(todoEntity)
+    }
+
+    func fetchTodos() -> [TodoEntity] {
+        let request = TodoEntity.request()
+
+        do {
+            return try coreDataStack.viewContext.fetch(request) as [TodoEntity]
+        } catch {
+            assertionFailure("ERROR-TodoRepository: \(error.localizedDescription)")
+            return []
+        }
     }
 
     func update(name: String, todoEntity: TodoEntity) -> TodoEntity {

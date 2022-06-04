@@ -7,4 +7,11 @@
 
 import CoreData
 
-extension TodoEntity {}
+extension TodoEntity {
+    static func request() -> NSFetchRequest<TodoEntity> {
+        let request: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+        let sort = NSSortDescriptor(key: #keyPath(TodoEntity.dateCreated), ascending: false)
+        request.sortDescriptors = [sort]
+        return request
+    }
+}
