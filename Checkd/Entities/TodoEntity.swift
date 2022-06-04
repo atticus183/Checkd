@@ -7,6 +7,4 @@
 
 import CoreData
 
-extension TodoEntity {
-    
-}
+extension TodoEntity {}

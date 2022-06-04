@@ -19,6 +19,8 @@
 		571B7B33284ACB9D006BAEEB /* ListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B32284ACB9D006BAEEB /* ListRepository.swift */; };
 		571B7B35284ACBA6006BAEEB /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B34284ACBA6006BAEEB /* TodoRepository.swift */; };
 		571B7B37284ACBBE006BAEEB /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B36284ACBBE006BAEEB /* Repository.swift */; };
+		571B7B39284AE81F006BAEEB /* ListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B38284AE81F006BAEEB /* ListViewViewModel.swift */; };
+		571B7B3B284AECBD006BAEEB /* AddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B7B3A284AECBD006BAEEB /* AddButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		571B7B32284ACB9D006BAEEB /* ListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRepository.swift; sourceTree = "<group>"; };
 		571B7B34284ACBA6006BAEEB /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		571B7B36284ACBBE006BAEEB /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		571B7B38284AE81F006BAEEB /* ListViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewViewModel.swift; sourceTree = "<group>"; };
+		571B7B3A284AECBD006BAEEB /* AddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 			children = (
 				571B7B29284AC0D8006BAEEB /* ListView */,
 				571B7B2A284AC0E9006BAEEB /* TodoListView */,
+				571B7B3A284AECBD006BAEEB /* AddButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -143,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				571B7AFB284ABC71006BAEEB /* ListView.swift */,
+				571B7B38284AE81F006BAEEB /* ListViewViewModel.swift */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
@@ -315,10 +321,12 @@
 				571B7B31284AC3BC006BAEEB /* TodoEntity.swift in Sources */,
 				571B7B03284ABC73006BAEEB /* CoreDataStack.swift in Sources */,
 				571B7B06284ABC73006BAEEB /* Checkd.xcdatamodeld in Sources */,
+				571B7B39284AE81F006BAEEB /* ListViewViewModel.swift in Sources */,
 				571B7B2F284AC3B1006BAEEB /* ListEntity.swift in Sources */,
 				571B7AFC284ABC71006BAEEB /* ListView.swift in Sources */,
 				571B7B35284ACBA6006BAEEB /* TodoRepository.swift in Sources */,
 				571B7B33284ACB9D006BAEEB /* ListRepository.swift in Sources */,
+				571B7B3B284AECBD006BAEEB /* AddButtonView.swift in Sources */,
 				571B7AFA284ABC71006BAEEB /* CheckdApp.swift in Sources */,
 				571B7B37284ACBBE006BAEEB /* Repository.swift in Sources */,
 			);

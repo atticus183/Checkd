@@ -5,19 +5,43 @@
 //  Created by Josh R on 6/3/22.
 //
 
+import Combine
 import CoreData
 
 class CoreDataStack {
     static let shared = CoreDataStack()
 
-    private(set) var inMemory: Bool = false
+    var contextDidChange = PassthroughSubject<Void, Error>()
+
+    var inMemory: Bool {
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            //Running in the preview
+            return true
+        } else if let _ = NSClassFromString("XCTest") {
+            //Running unit tests
+            return true
+        } else {
+            //Running in the simulator
+            return false
+        }
+        #else
+        //Running in production/release builds
+        return false
+        #endif
+    }
 
     private(set) var modelName: String = "Checkd"
 
     var viewContext: NSManagedObjectContext { container.viewContext }
 
-    init(inMemory: Bool = false) {
-        self.inMemory = inMemory
+    private init() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didSave),
+            name: NSManagedObjectContext.didSaveObjectsNotification,
+            object: viewContext
+        )
     }
 
     // MARK: NSPersistentContainer
@@ -30,10 +54,15 @@ class CoreDataStack {
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
+            container.viewContext.automaticallyMergesChangesFromParent = true
+            container.viewContext.mergePolicy = NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType
         })
-        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
+
+    @objc func didSave() {
+        contextDidChange.send(())
+    }
 
     /// A method to save the `NSManagedObjectContext`.
     func save() {
@@ -45,21 +74,4 @@ class CoreDataStack {
             assertionFailure("Error saving context: \(error)")
         }
     }
-}
-
-// MARK: Preview
-
-extension CoreDataStack {
-    static var preview: CoreDataStack = {
-        let result = CoreDataStack(inMemory: true)
-        let viewContext = result.container.viewContext
-
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return result
-    }()
 }
