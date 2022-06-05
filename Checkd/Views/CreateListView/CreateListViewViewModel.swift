@@ -20,7 +20,8 @@ final class CreateListViewViewModel: ObservableObject {
     }
 
     func addList() {
-        listRepository.add(name: desiredListName)
+        guard !desiredListName.isEmpty else { return }
+        listRepository.add(name: desiredListName.trimmingCharacters(in: .whitespacesAndNewlines))
         coordinator?.navigateBack()
     }
 }

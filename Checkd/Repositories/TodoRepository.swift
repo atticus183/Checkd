@@ -11,7 +11,8 @@ import Foundation
 protocol TodoRepository: Repository {
     @discardableResult func add(name: String, to list: ListEntity) -> TodoEntity
     func delete(todoEntity: TodoEntity)
-    func fetchTodos() -> [TodoEntity]
+    func fetchTodos(in list: ListEntity) -> [TodoEntity]
+    func toggleStatus(todoEntity: TodoEntity)
     @discardableResult func update(name: String, todoEntity: TodoEntity) -> TodoEntity
 }
 
@@ -32,8 +33,11 @@ final class DefaultTodoRepository: TodoRepository {
     func add(name: String, to list: ListEntity) -> TodoEntity {
         let todo = TodoEntity(context: coreDataStack.viewContext)
         todo.id = UUID()
-        todo.name = name
+        todo.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        todo.dateCreated = Date()
         todo.list = list
+
+        coreDataStack.save()
 
         return todo
     }
@@ -42,8 +46,8 @@ final class DefaultTodoRepository: TodoRepository {
         coreDataStack.viewContext.delete(todoEntity)
     }
 
-    func fetchTodos() -> [TodoEntity] {
-        let request = TodoEntity.request()
+    func fetchTodos(in list: ListEntity) -> [TodoEntity] {
+        let request = TodoEntity.request(in: list)
 
         do {
             return try coreDataStack.viewContext.fetch(request) as [TodoEntity]
@@ -53,8 +57,14 @@ final class DefaultTodoRepository: TodoRepository {
         }
     }
 
+    func toggleStatus(todoEntity: TodoEntity) {
+        todoEntity.toggleIsDone()
+        coreDataStack.save()
+    }
+
     func update(name: String, todoEntity: TodoEntity) -> TodoEntity {
         todoEntity.name = name
+        coreDataStack.save()
         return todoEntity
     }
 

@@ -10,9 +10,11 @@ import SwiftUI
 
 final class TodoListViewViewModel: ObservableObject {
     @Published var todos: [TodoEntity] = []
+    @Published var enteredText: String = ""
 
     weak var coordinator: AppCoordinator?
 
+    /// The list passed to retrieve the associated todos.
     var list: ListEntity
 
     private var cancellables: Set<AnyCancellable> = []
@@ -22,6 +24,16 @@ final class TodoListViewViewModel: ObservableObject {
     init(list: ListEntity, todoRepository: TodoRepository = DefaultTodoRepository()) {
         self.list = list
         self.todoRepository = todoRepository
+
+        todoRepository.repositoryHasChanges
+            .sink(receiveCompletion: { _ in }) { [weak self] hasChanges in
+            self?.fetchTodos()
+        }.store(in: &cancellables)
+    }
+
+    func addTodo() {
+        guard !enteredText.isEmpty else { return }
+        todoRepository.add(name: enteredText, to: list)
     }
 
     func deleteTodo(at indexSet: IndexSet) {
@@ -32,6 +44,10 @@ final class TodoListViewViewModel: ObservableObject {
     }
 
     func fetchTodos() {
-        todos = todoRepository.fetchTodos()
+        todos = todoRepository.fetchTodos(in: list)
+    }
+
+    func toggleTodoStatus(todo: TodoEntity) {
+        todoRepository.toggleStatus(todoEntity: todo)
     }
 }

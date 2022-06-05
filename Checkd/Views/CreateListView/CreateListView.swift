@@ -10,8 +10,6 @@ import SwiftUI
 struct CreateListView: View {
     @ObservedObject var viewModel: CreateListViewViewModel
 
-    @State private var showingAlert = false
-
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Add New List")
@@ -20,12 +18,7 @@ struct CreateListView: View {
             TextField("Please enter a list name", text: $viewModel.desiredListName)
                 .textFieldStyle(.roundedBorder)
             Button(action: {
-                if viewModel.desiredListName
-                    .trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    showingAlert = true
-                } else {
-                    viewModel.addList()
-                }
+                viewModel.addList()
             }, label: {
                 Label("Add List", systemImage: "list.dash")
                     .padding()
@@ -34,9 +27,6 @@ struct CreateListView: View {
                     .background(.pink)
                     .clipShape(Capsule())
             }).frame(maxWidth: .infinity)
-                .alert("Please enter a valid list name", isPresented: $showingAlert) {
-                    Button("OK", role: .cancel) { }
-                }
             Spacer()
         }
         .padding()

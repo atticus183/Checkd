@@ -14,11 +14,11 @@ struct AddButtonView: View {
 
     var imageName: String = "plus"
 
-    var handler: () -> Void
+    var action: () -> Void
 
     var body: some View {
         Button(action: {
-            handler()
+            action()
         }) {
             Image(systemName: imageName)
                 .resizable()
@@ -35,6 +35,6 @@ struct AddButtonView: View {
 
 struct AddButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        return AddButtonView(handler: {})
+        return AddButtonView(action: {})
     }
 }

@@ -8,10 +8,18 @@
 import CoreData
 
 extension TodoEntity {
-    static func request() -> NSFetchRequest<TodoEntity> {
+    static func request(in list: ListEntity?) -> NSFetchRequest<TodoEntity> {
         let request: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
+        if let list = list {
+            let predicate = NSPredicate(format: "list == %@", list)
+            request.predicate = predicate
+        }
         let sort = NSSortDescriptor(key: #keyPath(TodoEntity.dateCreated), ascending: false)
         request.sortDescriptors = [sort]
         return request
+    }
+
+    func toggleIsDone() {
+        self.isCompleted.toggle()
     }
 }

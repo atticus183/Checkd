@@ -48,11 +48,11 @@ struct ListView: View {
 struct ListRow: View {
     let list: ListEntity
 
-    var handler: () -> Void
+    var action: () -> Void
 
     var body: some View {
         HStack {
-            Button(action: { handler() }) {
+            Button(action: { action() }) {
                 Label {
                     Text(list.name ?? "").foregroundColor(.primary)
                 } icon: {
