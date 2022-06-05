@@ -25,7 +25,7 @@ struct AddButtonView: View {
                 .font(.system(size: 17, weight: .bold, design: .default))
                 .padding(EdgeInsets(top: 18, leading: 18, bottom: 18, trailing: 18))
                 .foregroundColor(.white)
-                .background(.pink)
+                .background(Color.appPrimaryColor)
                 .frame(width: buttonSize.width, height: buttonSize.height, alignment: .center)
                 .clipShape(Circle())
                 .shadow(color: colorScheme == .dark ? .clear : Color.gray, radius: 2, y: 2)

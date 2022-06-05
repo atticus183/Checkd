@@ -26,6 +26,7 @@
 		57564FDB284BE55500EADCC1 /* TodoListViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57564FDA284BE55500EADCC1 /* TodoListViewViewModel.swift */; };
 		57564FDE284C0F1D00EADCC1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57564FDD284C0F1D00EADCC1 /* Coordinator.swift */; };
 		57564FE0284C0FD600EADCC1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57564FDF284C0FD600EADCC1 /* AppCoordinator.swift */; };
+		57D074E0284D364800CB38DB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D074DF284D364800CB38DB /* Color.swift */; };
 		57F77280284C18F400C4B320 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57564FE1284C11E600EADCC1 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		57564FDD284C0F1D00EADCC1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		57564FDF284C0FD600EADCC1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		57564FE1284C11E600EADCC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		57D074DF284D364800CB38DB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		57F77281284C19A400C4B320 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 		571B7AF8284ABC71006BAEEB /* Checkd */ = {
 			isa = PBXGroup;
 			children = (
+				57D074DE284D363F00CB38DB /* Extensions */,
 				57564FE1284C11E600EADCC1 /* AppDelegate.swift */,
 				571B7AFD284ABC73006BAEEB /* Assets.xcassets */,
 				57564FDC284C0F0E00EADCC1 /* Coordinators */,
@@ -222,6 +225,14 @@
 				57564FDF284C0FD600EADCC1 /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		57D074DE284D363F00CB38DB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				57D074DF284D364800CB38DB /* Color.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +382,7 @@
 				571B7B3B284AECBD006BAEEB /* AddButtonView.swift in Sources */,
 				57F77280284C18F400C4B320 /* AppDelegate.swift in Sources */,
 				571B7B37284ACBBE006BAEEB /* Repository.swift in Sources */,
+				57D074E0284D364800CB38DB /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

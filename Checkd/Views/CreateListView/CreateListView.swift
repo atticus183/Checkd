@@ -24,7 +24,7 @@ struct CreateListView: View {
                     .padding()
                     .font(.system(size: 20, weight: .semibold, design: .default))
                     .foregroundColor(.white)
-                    .background(.pink)
+                    .background(Color.appPrimaryColor)
                     .clipShape(Capsule())
             }).frame(maxWidth: .infinity)
             Spacer()

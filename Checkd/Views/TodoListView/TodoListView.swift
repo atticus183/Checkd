@@ -71,7 +71,7 @@ struct EnterTodoView: View {
                     .frame(width: 75, height: 50, alignment: .center)
                     .font(.system(size: 17, weight: .semibold, design: .default))
                     .foregroundColor(.white)
-                    .background(.pink)
+                    .background(Color.appPrimaryColor)
                     .clipShape(Capsule())
             })
         }.padding(.trailing)
