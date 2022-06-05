@@ -12,7 +12,8 @@ protocol Coordinator: AnyObject {
     var parentCoordinator: Coordinator? { get set }
 
     /// The root view controller of a `Coordinator`.
-    var rootViewController: UINavigationController { get }
+    /// This is intended to be casted to a desired type ie. `UINavigationController`, `UISplitViewController`, etc.
+    var rootViewController: UIViewController { get }
 
     /// A method to dismiss the presented view controller.
     func dismiss()
@@ -27,6 +28,7 @@ extension Coordinator {
     }
 
     func navigateBack() {
-        rootViewController.popViewController(animated: true)
+        guard let nav = rootViewController as? UINavigationController else { return }
+        nav.popViewController(animated: true)
     }
 }

@@ -16,13 +16,15 @@ final class TodoListViewViewModel: ObservableObject {
     weak var coordinator: AppCoordinator?
 
     /// The list passed to retrieve the associated todos.
-    var list: ListEntity
+    var list: ListEntity? {
+        didSet { fetchTodos() }
+    }
 
     private var cancellables: Set<AnyCancellable> = []
 
     private let todoRepository: TodoRepository
 
-    init(list: ListEntity, todoRepository: TodoRepository = DefaultTodoRepository()) {
+    init(list: ListEntity?, todoRepository: TodoRepository = DefaultTodoRepository()) {
         self.list = list
         self.todoRepository = todoRepository
 
@@ -33,7 +35,7 @@ final class TodoListViewViewModel: ObservableObject {
     }
 
     func addTodo() {
-        guard !enteredText.isEmpty else { return }
+        guard !enteredText.isEmpty, let list = list else { return }
         todoRepository.add(name: enteredText, to: list)
         enteredText.removeAll()
     }
@@ -46,6 +48,7 @@ final class TodoListViewViewModel: ObservableObject {
     }
 
     func fetchTodos() {
+        guard let list = list else { return }
         let allListTodos = todoRepository.fetchTodos(in: list)
         activeTodos = allListTodos.filter { !$0.isCompleted }
         completedTodos = allListTodos.filter { $0.isCompleted }

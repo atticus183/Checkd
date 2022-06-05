@@ -13,10 +13,15 @@ final class AppCoordinator: Coordinator {
     /// A parent coordinator should always be marked with `weak`.
     weak var parentCoordinator: Coordinator? = nil
 
-    let rootViewController: UINavigationController = {
-        let nav = UINavigationController()
-        nav.navigationBar.prefersLargeTitles = true
-        return nav
+    var rootViewController: UIViewController {
+        splitViewController
+    }
+
+    lazy var splitViewController: UISplitViewController = {
+        let split = UISplitViewController(style: .doubleColumn)
+        split.preferredDisplayMode = .oneBesideSecondary
+        split.delegate = self
+        return split
     }()
 
     /// The `UIWindow` passed from `AppDelegate`.
@@ -30,16 +35,28 @@ final class AppCoordinator: Coordinator {
 
     /// The coordinator method that starts the application.
     func start() {
-        window?.rootViewController = rootViewController
-        window?.makeKeyAndVisible()
+        let listViewModel = ListViewViewModel()
+        listViewModel.coordinator = self
+        let listView = ListView(viewModel: listViewModel)
+        listView.viewModel.coordinator = self
+        let listHostingController = UIHostingController(rootView: listView)
+        listHostingController.title = "Lists"
 
-        let viewModel = ListViewViewModel()
-        viewModel.coordinator = self
-        let view = ListView(viewModel: viewModel)
-        view.viewModel.coordinator = self
-        let hostingController = UIHostingController(rootView: view)
-        hostingController.title = "Lists"
-        rootViewController.setViewControllers([hostingController], animated: true)
+        let todoViewModel = TodoListViewViewModel(list: nil)
+        todoViewModel.coordinator = self
+        let todoView = TodoListView(viewModel: todoViewModel)
+        let todoHostingController = UIHostingController(rootView: todoView)
+
+        splitViewController.setViewController(listHostingController, for: .primary)
+        splitViewController.setViewController(todoHostingController, for: .secondary)
+
+        if let nav = splitViewController.viewControllers.first as? UINavigationController {
+            nav.navigationBar.prefersLargeTitles = true
+            nav.navigationItem.largeTitleDisplayMode = .automatic
+        }
+
+        window?.rootViewController = splitViewController
+        window?.makeKeyAndVisible()
     }
 
     /// A coordinator method to navigate to a `CreateListView`.
@@ -53,12 +70,18 @@ final class AppCoordinator: Coordinator {
 
     /// A coordinator method to navigate to a `TodoListView`.
     func goToTodoListView(list: ListEntity) {
-        let viewModel = TodoListViewViewModel(list: list)
-        viewModel.coordinator = self
-        let view = TodoListView(viewModel: viewModel)
-        let hostingController = UIHostingController(rootView: view)
-        hostingController.title = list.name ?? "Todo"
-        rootViewController.pushViewController(hostingController, animated: true)
+        guard let todoListVc = splitViewController.viewController(for: .secondary) as? UIHostingController<TodoListView> else { return }
+        todoListVc.rootView.viewModel.list = list
+        todoListVc.title = list.name ?? "Todo"
+        splitViewController.showDetailViewController(todoListVc, sender: self)
     }
+}
 
+// MARK: UISplitViewControllerDelegate
+
+extension AppCoordinator : UISplitViewControllerDelegate {
+    //This method shows the master detail FIRST when on iPhone
+    func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
+        return .primary
+    }
 }
