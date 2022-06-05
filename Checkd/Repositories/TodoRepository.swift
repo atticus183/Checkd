@@ -44,6 +44,7 @@ final class DefaultTodoRepository: TodoRepository {
 
     func delete(todoEntity: TodoEntity) {
         coreDataStack.viewContext.delete(todoEntity)
+        coreDataStack.save()
     }
 
     func fetchTodos(in list: ListEntity) -> [TodoEntity] {
@@ -58,6 +59,14 @@ final class DefaultTodoRepository: TodoRepository {
     }
 
     func toggleStatus(todoEntity: TodoEntity) {
+        //Change from Complete to Not Done
+        if todoEntity.isCompleted {
+            todoEntity.dateCompleted = nil
+        } else {
+            //Mark Complete
+            todoEntity.dateCompleted = Date()
+        }
+
         todoEntity.toggleIsDone()
         coreDataStack.save()
     }

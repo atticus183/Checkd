@@ -9,7 +9,8 @@ import Combine
 import SwiftUI
 
 final class TodoListViewViewModel: ObservableObject {
-    @Published var todos: [TodoEntity] = []
+    @Published var activeTodos: [TodoEntity] = []
+    @Published var completedTodos: [TodoEntity] = []
     @Published var enteredText: String = ""
 
     weak var coordinator: AppCoordinator?
@@ -34,17 +35,20 @@ final class TodoListViewViewModel: ObservableObject {
     func addTodo() {
         guard !enteredText.isEmpty else { return }
         todoRepository.add(name: enteredText, to: list)
+        enteredText.removeAll()
     }
 
-    func deleteTodo(at indexSet: IndexSet) {
+    func deleteTodo(at indexSet: IndexSet, inSection section: Int) {
         for index in indexSet {
-            let todo = todos[index]
+            let todo = section == 0 ? activeTodos[index] : completedTodos[index]
             todoRepository.delete(todoEntity: todo)
         }
     }
 
     func fetchTodos() {
-        todos = todoRepository.fetchTodos(in: list)
+        let allListTodos = todoRepository.fetchTodos(in: list)
+        activeTodos = allListTodos.filter { !$0.isCompleted }
+        completedTodos = allListTodos.filter { $0.isCompleted }
     }
 
     func toggleTodoStatus(todo: TodoEntity) {

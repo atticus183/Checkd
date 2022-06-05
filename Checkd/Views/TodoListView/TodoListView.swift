@@ -17,13 +17,30 @@ struct TodoListView: View {
                 viewModel.addTodo()
             }
             List {
-                ForEach(viewModel.todos, id: \.id) { todo in
-                    TodoRow(todo: todo) {
-                        viewModel.toggleTodoStatus(todo: todo)
+                Section("Not Done") {
+                    ForEach(viewModel.activeTodos, id: \.id) { todo in
+                        TodoRow(todo: todo) {
+                            withAnimation {
+                                viewModel.toggleTodoStatus(todo: todo)
+                            }
+                        }
+                    }.onDelete { indexSet in
+                        viewModel.deleteTodo(at: indexSet, inSection: 0)
                     }
-                }.onDelete { indexSet in
-                    viewModel.deleteTodo(at: indexSet)
-                }
+                }.headerProminence(.increased)
+
+                Section("Completed") {
+                    ForEach(viewModel.completedTodos, id: \.id) { todo in
+                        TodoRow(todo: todo) {
+                            withAnimation {
+                                viewModel.toggleTodoStatus(todo: todo)
+                            }
+                        }
+                    }.onDelete { indexSet in
+                        viewModel.deleteTodo(at: indexSet, inSection: 1)
+                    }
+                }.headerProminence(.increased)
+
             }
             .listStyle(.insetGrouped)
         }.onAppear {
@@ -69,12 +86,13 @@ struct TodoRow: View {
     var body: some View {
         HStack {
             Button { action() } label: {
-                Label {
+                VStack(alignment: .leading) {
                     Text(todo.name ?? "")
-                        .foregroundColor(.primary)
+                        .foregroundColor(todo.isCompleted ? .gray : .primary)
                         .strikethrough(todo.isCompleted, color: .red)
-                } icon: {
-                    Image(systemName: "circle")
+                    Text("Created: \(todo.dateCreatedString)")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
                 }
             }
         }

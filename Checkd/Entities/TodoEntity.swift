@@ -18,6 +18,18 @@ extension TodoEntity {
         request.sortDescriptors = [sort]
         return request
     }
+}
+
+extension TodoEntity {
+    var dateCreatedString: String {
+        dateFormatter.string(from: self.dateCreated ?? Date())
+    }
+
+    var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.dateStyle = .short
+        return df
+    }
 
     func toggleIsDone() {
         self.isCompleted.toggle()

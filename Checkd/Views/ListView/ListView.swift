@@ -59,7 +59,7 @@ struct ListRow: View {
                     Image(systemName: "list.dash")
                 }
             }.frame(maxWidth: .infinity, alignment: .leading)
-            Text("\(list.todoCount)")
+            Text(list.status)
         }
     }
 }

@@ -22,6 +22,6 @@ final class CreateListViewViewModel: ObservableObject {
     func addList() {
         guard !desiredListName.isEmpty else { return }
         listRepository.add(name: desiredListName.trimmingCharacters(in: .whitespacesAndNewlines))
-        coordinator?.navigateBack()
+        coordinator?.dismiss()
     }
 }
