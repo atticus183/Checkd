@@ -8,11 +8,12 @@
 import Combine
 import SwiftUI
 
-@MainActor
 final class ListViewViewModel: ObservableObject {
     @Published var lists: [ListEntity] = []
 
     private var cancellables: Set<AnyCancellable> = []
+
+    weak var coordinator: AppCoordinator?
 
     private let listRepository: ListRepository
 
@@ -25,6 +26,7 @@ final class ListViewViewModel: ObservableObject {
         }.store(in: &cancellables)
     }
 
+    /// A method to delete a `ListEntity`.
     func deleteList(at indexSet: IndexSet) {
         for index in indexSet {
             let list = lists[index]

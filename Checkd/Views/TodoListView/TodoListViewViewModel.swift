@@ -8,9 +8,10 @@
 import Combine
 import SwiftUI
 
-@MainActor
 final class TodoListViewViewModel: ObservableObject {
     @Published var todos: [TodoEntity] = []
+
+    weak var coordinator: AppCoordinator?
 
     var list: ListEntity
 

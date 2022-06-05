@@ -8,38 +8,35 @@
 import SwiftUI
 
 struct ListView: View {
-    @StateObject var viewModel = ListViewViewModel()
+    @ObservedObject var viewModel: ListViewViewModel
     @State private var showingCreateListView = false
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                List {
-                    ForEach(viewModel.lists, id: \.id) { list in
-                        ListRow(list: list)
-                    }.onDelete { indexSet in
-                        viewModel.deleteList(at: indexSet)
-                    }.onMove { indexSet, destination in
-                        viewModel.moveList(from: indexSet, to: destination)
+        ZStack {
+            List {
+                ForEach(viewModel.lists, id: \.id) { list in
+                    ListRow(list: list) {
+                        viewModel.coordinator?.goToTodoListView(list: list)
                     }
+                }.onDelete { indexSet in
+                    viewModel.deleteList(at: indexSet)
+                }.onMove { indexSet, destination in
+                    viewModel.moveList(from: indexSet, to: destination)
                 }
-                .listStyle(.insetGrouped)
+            }
+            .listStyle(.insetGrouped)
 
-                VStack {
-                    Spacer()
-                    AddButtonView {
-                        showingCreateListView.toggle()
-                    }.sheet(isPresented: $showingCreateListView) {
-                        CreateListView()
-                    }.padding()
-                }
+            VStack {
+                Spacer()
+                AddButtonView {
+                    viewModel.coordinator?.goToCreateListView()
+                }.padding()
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
             }
-            .navigationTitle("Lists")
         }
         .navigationViewStyle(StackNavigationViewStyle())   //fixes console errors
         .onAppear {
@@ -51,16 +48,18 @@ struct ListView: View {
 struct ListRow: View {
     let list: ListEntity
 
+    var handler: () -> Void
+
     var body: some View {
         HStack {
-            Label {
-                Text(list.name ?? "")
-            } icon: {
-                Image(systemName: "list.dash")
-            }
-            Spacer()
+            Button(action: { handler() }) {
+                Label {
+                    Text(list.name ?? "").foregroundColor(.primary)
+                } icon: {
+                    Image(systemName: "list.dash")
+                }
+            }.frame(maxWidth: .infinity, alignment: .leading)
             Text("\(list.todoCount)")
-
         }
     }
 }
@@ -68,6 +67,7 @@ struct ListRow: View {
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
         ListEntity.createForPreview()
-        return ListView()
+        let vm = ListViewViewModel()
+        return ListView(viewModel: vm)
     }
 }

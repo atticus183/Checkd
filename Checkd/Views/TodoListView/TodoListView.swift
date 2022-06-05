@@ -22,8 +22,6 @@ struct TodoListView: View {
             }
             .listStyle(.insetGrouped)
         }
-        .navigationTitle("Todos")
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()

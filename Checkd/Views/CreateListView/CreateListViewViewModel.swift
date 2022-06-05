@@ -8,9 +8,10 @@
 import Combine
 import SwiftUI
 
-@MainActor
 final class CreateListViewViewModel: ObservableObject {
     @Published var desiredListName: String = ""
+
+    weak var coordinator: AppCoordinator?
 
     private let listRepository: ListRepository
 
@@ -20,5 +21,6 @@ final class CreateListViewViewModel: ObservableObject {
 
     func addList() {
         listRepository.add(name: desiredListName)
+        coordinator?.navigateBack()
     }
 }

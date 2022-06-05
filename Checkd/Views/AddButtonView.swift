@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddButtonView: View {
+    @Environment(\.colorScheme) var colorScheme
 
     var buttonSize: CGSize = .init(width: 56, height: 56)
 
@@ -21,13 +22,13 @@ struct AddButtonView: View {
         }) {
             Image(systemName: imageName)
                 .resizable()
-                .font(.title)
-                .padding(EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16))
+                .font(.system(size: 17, weight: .bold, design: .default))
+                .padding(EdgeInsets(top: 18, leading: 18, bottom: 18, trailing: 18))
                 .foregroundColor(.white)
                 .background(.pink)
                 .frame(width: buttonSize.width, height: buttonSize.height, alignment: .center)
                 .clipShape(Circle())
-                .shadow(color: Color.gray, radius: 2, y: 2)
+                .shadow(color: colorScheme == .dark ? .clear : Color.gray, radius: 2, y: 2)
         }
     }
 }

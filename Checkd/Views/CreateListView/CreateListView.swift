@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct CreateListView: View {
-    @StateObject var viewModel = CreateListViewViewModel()
+    @ObservedObject var viewModel: CreateListViewViewModel
 
     @State private var showingAlert = false
-    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -26,7 +25,6 @@ struct CreateListView: View {
                     showingAlert = true
                 } else {
                     viewModel.addList()
-                    dismiss()
                 }
             }, label: {
                 Label("Add List", systemImage: "list.dash")
@@ -47,6 +45,7 @@ struct CreateListView: View {
 
 struct CreateListView_Previews: PreviewProvider {
     static var previews: some View {
-        return CreateListView()
+        let vm = CreateListViewViewModel()
+        return CreateListView(viewModel: vm)
     }
 }
