@@ -23,12 +23,15 @@ class CoreDataStackTests: XCTestCase {
         subject = nil
     }
 
+    /// Ensures the core data store is in memory.
     func testInMemory() {
         XCTAssertTrue(subject.inMemory)
     }
 
+    /// Ensures the core data model name is correct.
     func testModelName() {
-        XCTAssertEqual(subject.modelName, "Checkd")
+        let expectedModelName = "Checkd"
+        XCTAssertEqual(subject.modelName, expectedModelName)
         XCTAssertEqual(subject.container.name, subject.modelName)
     }
 }

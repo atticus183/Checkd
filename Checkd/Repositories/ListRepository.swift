@@ -10,13 +10,36 @@ import CoreData
 import Foundation
 
 protocol ListRepository: Repository {
+
+    /// Adds a `ListEntity`.
+    /// - Parameter name: The desired name of the list.
+    /// - Returns: A successfully added `ListEntity`.
     @discardableResult func add(name: String) -> ListEntity
+
+    /// Deletes a `ListEntity`.
+    /// - Parameter listEntity: The list to delete.
     func delete(listEntity: ListEntity)
+
+    /// Fetches all lists.
+    /// - Returns: An array of `ListEntity`.
     func fetchLists() -> [ListEntity]
+
+    /// Reorders a `ListEntity`.
+    /// - Parameters:
+    ///   - list: The list to move.
+    ///   - index: The destination index.
+    ///   - lists: The lists displayed.
     func move(list: ListEntity, to index: Int, lists: [ListEntity])
+
+    /// Updates a `ListEntity`.
+    /// - Parameters:
+    ///   - name: The desired new name.
+    ///   - listEntity: The list to update.
+    /// - Returns: The updated list.
     @discardableResult func update(name: String, listEntity: ListEntity) -> ListEntity
 }
 
+/// A concrete implementation of a `ListRepository`.
 class DefaultListRepository: ListRepository {
     private var cancellables: Set<AnyCancellable> = []
 

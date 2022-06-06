@@ -64,10 +64,18 @@ struct ListRow: View {
     }
 }
 
+// MARK: SwiftUI Preview
+
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListEntity.createForPreview()
-        let vm = ListViewViewModel()
-        return ListView(viewModel: vm)
+        let coreDataStack = CoreDataStack(inMemory: true)
+        ListEntity.createForPreview(coreDataStack: coreDataStack)
+        let repo = DefaultListRepository(coreDataStack: coreDataStack)
+        let vm = ListViewViewModel(listRepository: repo)
+
+        return NavigationView {
+            ListView(viewModel: vm)
+                .navigationTitle("Lists")
+        }
     }
 }

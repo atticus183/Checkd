@@ -25,6 +25,7 @@ class CreateListViewViewModelTests: XCTestCase {
         subject = nil
     }
 
+    /// Ensures the view model adds the list via the repository `add` method.
     func testAddList() {
         subject.desiredListName = "Shopping"
         subject.addList()
@@ -34,6 +35,7 @@ class CreateListViewViewModelTests: XCTestCase {
         XCTAssertEqual(lists.count, 1)
     }
 
+    /// Ensures the `CoreDataStack` is in memory.
     func testCoreDataStack() {
         XCTAssertTrue(subject.listRepository.coreDataStack.inMemory)
     }

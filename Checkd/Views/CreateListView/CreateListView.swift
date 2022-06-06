@@ -7,14 +7,9 @@
 
 import SwiftUI
 
-private enum Field: Int, Hashable {
-    case enterListName
-}
-
+/// A `View` that allows the user to create a new `ListEntity`.
 struct CreateListView: View {
     @ObservedObject var viewModel: CreateListViewViewModel
-
-    @FocusState private var enterListField: Field?
     @FocusState private var isEnterListFieldFocused: Bool
 
     var body: some View {
@@ -45,6 +40,8 @@ struct CreateListView: View {
         }
     }
 }
+
+// MARK: SwiftUI Preview
 
 struct CreateListView_Previews: PreviewProvider {
     static var previews: some View {

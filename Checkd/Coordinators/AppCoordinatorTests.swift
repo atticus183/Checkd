@@ -24,18 +24,23 @@ class AppCoordinatorTests: XCTestCase {
         subject = nil
     }
 
+    /// Ensures the parent coordinator is nil.
+    /// The top level `Coordinator` should not have a parent.
     func testParentCoordinator() {
         XCTAssertNil(subject.parentCoordinator)
     }
 
+    /// Ensures the `AppCoordinator`s root view controller is of a type `UISplitViewController`.
     func testRootViewController() {
         XCTAssertTrue(subject.rootViewController is UISplitViewController)
     }
 
+    /// Ensures the window is set during initialization.
     func testWindow() {
         XCTAssertNotNil(subject.window)
     }
 
+    /// Ensures the window's root view controller is the AppCoordinator's root view controller.
     func testWindow_RootViewController() {
         subject.start()
         XCTAssertIdentical(subject.window.rootViewController, subject.rootViewController)

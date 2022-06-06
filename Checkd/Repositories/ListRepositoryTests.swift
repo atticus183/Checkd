@@ -26,6 +26,7 @@ class ListRepositoryTests: XCTestCase {
         subject = nil
     }
 
+    /// Ensures the repository `add` method successfully adds a list to the database.
     func testAdd() {
         let desiredListName = "Groceries"
         subject.add(name: desiredListName)
@@ -38,10 +39,12 @@ class ListRepositoryTests: XCTestCase {
         XCTAssertNotNil(databaseList?.id)
     }
 
+    /// Ensures the `CoreDataStack` is in memory.
     func testCoreDataStack() {
         XCTAssertTrue(subject.coreDataStack.inMemory)
     }
 
+    /// Ensures the repository `delete` method successfully deletes a list from the database.
     func testDelete() {
         let desiredListName = "Groceries"
         subject.add(name: desiredListName)
@@ -57,6 +60,8 @@ class ListRepositoryTests: XCTestCase {
         XCTAssertEqual(allLists2.count, 0)
     }
 
+    /// Ensures the repository `delete` method successfully deletes a list to the database.
+    /// Also ensures the associated todos are also deleted.
     func testDelete_TodosDelete() {
         let desiredListName = "Groceries"
         let list = subject.add(name: desiredListName)
@@ -83,6 +88,7 @@ class ListRepositoryTests: XCTestCase {
         XCTAssertEqual(allTodos.count, 0)
     }
 
+    /// Ensures the repository `update` method successfully updates the list in the database.
     func testUpdate() {
         let misspelledListName = "Grocerrrrries"
         subject.add(name: misspelledListName)

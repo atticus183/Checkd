@@ -25,10 +25,12 @@ class ListViewViewModelTests: XCTestCase {
         subject = nil
     }
 
+    /// Ensures the `CoreDataStack` is in memory.
     func testCoreDataStack() {
         XCTAssertTrue(subject.listRepository.coreDataStack.inMemory)
     }
 
+    /// Ensures the view model deletes the list via the repository `delete` method.
     func testDeleteList() {
         let shoppingList = mockRepository.add(name: "Shopping")
         let lists = mockRepository.fetchLists()
@@ -42,6 +44,7 @@ class ListViewViewModelTests: XCTestCase {
         XCTAssertEqual(lists2.count, 0)
     }
 
+    /// Ensures the view model retrieves the lists from the repository.
     func testFetchLists() {
         let emptyLists = mockRepository.fetchLists()
         XCTAssertEqual(emptyLists.count, 0)
@@ -51,6 +54,7 @@ class ListViewViewModelTests: XCTestCase {
         XCTAssertEqual(subject.lists.count, 1)
     }
 
+    /// Ensures the view model moves the list via the repository `moveList` method.
     func testMoveList() {
         let list1 = mockRepository.add(name: "Shopping")
         list1.sortIndex = 0

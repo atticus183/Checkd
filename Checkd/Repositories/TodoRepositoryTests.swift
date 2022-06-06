@@ -23,6 +23,7 @@ class TodoRepositoryTests: XCTestCase {
         subject = nil
     }
 
+    /// Ensures the repository `add` method successfully adds a todo to the database.
     func testAdd() {
         let list = ListEntity(context: subject.coreDataStack.viewContext)
         list.name = "Groceries"
@@ -41,10 +42,12 @@ class TodoRepositoryTests: XCTestCase {
         XCTAssertEqual(databaseTodo?.list?.todoCount, 1)
     }
 
+    /// Ensures the `CoreDataStack` is in memory.
     func testCoreDataStack() {
         XCTAssertTrue(subject.coreDataStack.inMemory)
     }
 
+    /// Ensures the repository `delete` method successfully deletes a todo from the database.
     func testDelete() {
         let list = ListEntity(context: subject.coreDataStack.viewContext)
         list.name = "Groceries"
@@ -61,6 +64,7 @@ class TodoRepositoryTests: XCTestCase {
         XCTAssertEqual(allTodos2.count, 0)
     }
 
+    /// Ensures the repository `update` method successfully updates the todo in the database.
     func testUpdate() {
         let list = ListEntity(context: subject.coreDataStack.viewContext)
         list.name = "Groceries"

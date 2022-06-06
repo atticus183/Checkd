@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A type all coordinators should conform to.
 protocol Coordinator: AnyObject {
     /// The parent coordinator of this conforming `Coordinator`.
     var parentCoordinator: Coordinator? { get set }

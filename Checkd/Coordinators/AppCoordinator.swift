@@ -17,6 +17,7 @@ final class AppCoordinator: Coordinator {
         splitViewController
     }
 
+    /// The `UISplitViewController` that acts as this coordinator's root view controller.
     lazy var splitViewController: UISplitViewController = {
         let split = UISplitViewController(style: .doubleColumn)
         split.preferredDisplayMode = .oneBesideSecondary
@@ -80,7 +81,6 @@ final class AppCoordinator: Coordinator {
 // MARK: UISplitViewControllerDelegate
 
 extension AppCoordinator : UISplitViewControllerDelegate {
-    //This method shows the master detail FIRST when on iPhone
     func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
         return .primary
     }

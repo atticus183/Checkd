@@ -10,6 +10,7 @@ import SwiftUI
 @main
 class AppDelegate: NSObject, UIApplicationDelegate {
 
+    /// The top level `Coordinator` of the app.
     var appCoordinator: AppCoordinator?
 
     var window: UIWindow?

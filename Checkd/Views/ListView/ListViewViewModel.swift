@@ -8,13 +8,16 @@
 import Combine
 import SwiftUI
 
+/// The view model for a `ListView`.
 final class ListViewViewModel: ObservableObject {
     @Published var lists: [ListEntity] = []
 
     private var cancellables: Set<AnyCancellable> = []
 
+    /// The `Coordinator` for the view model.
     weak var coordinator: AppCoordinator?
 
+    /// The `Repository` for the view model.
     private(set) var listRepository: ListRepository
 
     init(listRepository: ListRepository = DefaultListRepository()) {
@@ -34,10 +37,12 @@ final class ListViewViewModel: ObservableObject {
         }
     }
 
+    /// A method to fetch all lists from the repository.
     func fetchLists() {
         lists = listRepository.fetchLists()
     }
 
+    /// A method to reorder a list.
     func moveList(from indexSet: IndexSet, to destIndex: Int) {
         guard let fromIndex = indexSet.last, lists.count > destIndex else { return }
         let listBeingMoved = lists[fromIndex]

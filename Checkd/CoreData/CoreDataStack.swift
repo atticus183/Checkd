@@ -8,17 +8,25 @@
 import Combine
 import CoreData
 
+/// The Core Data object for the application.
 final class CoreDataStack {
     static let shared = CoreDataStack()
 
+    /// A `PassthroughSubject` that emits a value when the viewContext has changed.
     var contextDidChange = PassthroughSubject<Void, Error>()
 
+    /// A `Boolean` to set if the store should be in memory.
+    /// Set to `true` during unit tests.
     private(set) var inMemory: Bool
 
+    /// The name of the core data model.
     private(set) var modelName: String = "Checkd"
 
+    /// The view context of the `NSPersistentContainer`.
     var viewContext: NSManagedObjectContext { container.viewContext }
 
+    /// Initializes a `CoreDataStack`.
+    /// - Parameter inMemory: Determines if the store should be in memory.
     init(inMemory: Bool = false) {
         self.inMemory = inMemory
 
@@ -31,6 +39,8 @@ final class CoreDataStack {
     }
 
     // MARK: NSPersistentContainer
+
+    /// The `NSPersistentContainer` of the application.
     lazy var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: modelName)
         if inMemory {

@@ -9,14 +9,40 @@ import Combine
 import Foundation
 
 protocol TodoRepository: Repository {
+
+    /// Adds a `TodoEntity`.
+    /// - Parameters:
+    ///   - name: The desired name of the todo.
+    ///   - list: The list belonging to the todo.
+    /// - Returns: A successfully added `TodoEntity`.
     @discardableResult func add(name: String, to list: ListEntity) -> TodoEntity
+
+    /// Deletes a `TodoEntity`.
+    /// - Parameter todoEntity: The todo to delete.
     func delete(todoEntity: TodoEntity)
+
+    /// Fetches all todos.
+    /// - Returns: An array of `TodoEntity`.
     func fetchAllTodos() -> [TodoEntity]
+
+    /// Fetches todos in a `ListEntity`.
+    /// - Parameter list: The list to filter on.
+    /// - Returns: An array of `TodoEntity`.
     func fetchTodos(in list: ListEntity) -> [TodoEntity]
+
+    /// Toggles the completion state of the todo.
+    /// - Parameter todoEntity: The todo to toggle.
     func toggleStatus(todoEntity: TodoEntity)
+
+    /// Updates a `TodoEntity`.
+    /// - Parameters:
+    ///   - name: The desired new name.
+    ///   - todoEntity: The todo to update.
+    /// - Returns: The updated todo.
     @discardableResult func update(name: String, todoEntity: TodoEntity) -> TodoEntity
 }
 
+/// A concrete implementation of a `TodoRepository`.
 class DefaultTodoRepository: TodoRepository {
     private var cancellables: Set<AnyCancellable> = []
 

@@ -27,6 +27,7 @@ class TodoListViewViewModelTests: XCTestCase {
         subject = nil
     }
 
+    /// Ensures the view model adds the todo via the repository `add` method.
     func testAddTodo() {
         let list = mockListRepository.add(name: "Shopping")
         subject.list = list
@@ -38,10 +39,12 @@ class TodoListViewViewModelTests: XCTestCase {
         XCTAssertEqual(todos.count, 1)
     }
 
+    /// Ensures the `CoreDataStack` is in memory.
     func testCoreDataStack() {
         XCTAssertTrue(subject.todoRepository.coreDataStack.inMemory)
     }
 
+    /// Ensures the view model deletes the todo via the repository `delete` method.
     func testDeleteTodo() {
         let list = mockListRepository.add(name: "Shopping")
         subject.list = list
@@ -59,6 +62,7 @@ class TodoListViewViewModelTests: XCTestCase {
         XCTAssertEqual(list.todoCount, 0)
     }
 
+    /// Ensures the view model retrieves the todos from the repository.
     func testFetchTodos() {
         let list = mockListRepository.add(name: "Shopping")
         subject.list = list
@@ -69,6 +73,7 @@ class TodoListViewViewModelTests: XCTestCase {
         XCTAssertEqual(todos.count, 1)
     }
 
+    /// Ensures the view model toggles the completion status of a todo.
     func testToggleTodoStatus() {
         let list = mockListRepository.add(name: "Shopping")
         subject.list = list
