@@ -22,7 +22,7 @@ final class TodoListViewViewModel: ObservableObject {
 
     private var cancellables: Set<AnyCancellable> = []
 
-    private let todoRepository: TodoRepository
+    private(set) var todoRepository: TodoRepository
 
     init(list: ListEntity?, todoRepository: TodoRepository = DefaultTodoRepository()) {
         self.list = list

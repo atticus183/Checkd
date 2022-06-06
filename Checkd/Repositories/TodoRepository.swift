@@ -11,25 +11,29 @@ import Foundation
 protocol TodoRepository: Repository {
     @discardableResult func add(name: String, to list: ListEntity) -> TodoEntity
     func delete(todoEntity: TodoEntity)
+    func fetchAllTodos() -> [TodoEntity]
     func fetchTodos(in list: ListEntity) -> [TodoEntity]
     func toggleStatus(todoEntity: TodoEntity)
     @discardableResult func update(name: String, todoEntity: TodoEntity) -> TodoEntity
 }
 
-final class DefaultTodoRepository: TodoRepository {
+class DefaultTodoRepository: TodoRepository {
     private var cancellables: Set<AnyCancellable> = []
 
-    private(set) var coreDataStack: CoreDataStack = .shared
+    private(set) var coreDataStack: CoreDataStack
 
     var repositoryHasChanges = PassthroughSubject<Bool, Error>()
 
-    init() {
+    init(coreDataStack: CoreDataStack = .shared) {
+        self.coreDataStack = coreDataStack
+
         coreDataStack.contextDidChange
             .sink(receiveCompletion: { _ in }) { [weak self] _ in
                 self?.repositoryHasChanges.send(true)
             }.store(in: &cancellables)
     }
 
+    @discardableResult
     func add(name: String, to list: ListEntity) -> TodoEntity {
         let todo = TodoEntity(context: coreDataStack.viewContext)
         todo.id = UUID()
@@ -45,6 +49,17 @@ final class DefaultTodoRepository: TodoRepository {
     func delete(todoEntity: TodoEntity) {
         coreDataStack.viewContext.delete(todoEntity)
         coreDataStack.save()
+    }
+
+    func fetchAllTodos() -> [TodoEntity] {
+        let request = TodoEntity.request(in: nil)
+
+        do {
+            return try coreDataStack.viewContext.fetch(request) as [TodoEntity]
+        } catch {
+            assertionFailure("ERROR-TodoRepository: \(error.localizedDescription)")
+            return []
+        }
     }
 
     func fetchTodos(in list: ListEntity) -> [TodoEntity] {
@@ -71,6 +86,7 @@ final class DefaultTodoRepository: TodoRepository {
         coreDataStack.save()
     }
 
+    @discardableResult
     func update(name: String, todoEntity: TodoEntity) -> TodoEntity {
         todoEntity.name = name
         coreDataStack.save()

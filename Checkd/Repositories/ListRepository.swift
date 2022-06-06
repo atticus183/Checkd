@@ -17,14 +17,16 @@ protocol ListRepository: Repository {
     @discardableResult func update(name: String, listEntity: ListEntity) -> ListEntity
 }
 
-final class DefaultListRepository: ListRepository {
+class DefaultListRepository: ListRepository {
     private var cancellables: Set<AnyCancellable> = []
 
-    private(set) var coreDataStack: CoreDataStack = .shared
+    private(set) var coreDataStack: CoreDataStack
 
     var repositoryHasChanges = PassthroughSubject<Bool, Error>()
 
-    init() {
+    init(coreDataStack: CoreDataStack = .shared) {
+        self.coreDataStack = coreDataStack
+
         coreDataStack.contextDidChange
             .sink(receiveCompletion: { _ in }) { [weak self] _ in
                 self?.repositoryHasChanges.send(true)
@@ -71,6 +73,7 @@ final class DefaultListRepository: ListRepository {
         coreDataStack.save()
     }
 
+    @discardableResult
     func update(name: String, listEntity: ListEntity) -> ListEntity {
         listEntity.name = name
         return listEntity

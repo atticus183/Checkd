@@ -13,7 +13,7 @@ final class CreateListViewViewModel: ObservableObject {
 
     weak var coordinator: AppCoordinator?
 
-    private let listRepository: ListRepository
+    private(set) var listRepository: ListRepository
 
     init(listRepository: ListRepository = DefaultListRepository()) {
         self.listRepository = listRepository

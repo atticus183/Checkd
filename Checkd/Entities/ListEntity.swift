@@ -17,7 +17,7 @@ extension ListEntity {
 }
 
 extension ListEntity {
-    var activeTodos: Int {
+    var activeTodoCount: Int {
         sortedTodos.filter { !$0.isCompleted }.count
     }
 
@@ -30,15 +30,17 @@ extension ListEntity {
     }
 
     var status: String {
-        todoCount == 0 ? "0" : "\(activeTodos) / \(todoCount)"
+        if todoCount == 0 {
+            return "0"
+        } else if activeTodoCount == 0 {
+            return "Complete"
+        } else {
+            return "\(activeTodoCount) / \(todoCount)"
+        }
     }
 
     var todoCount: Int {
         todos?.count ?? 0
-    }
-
-    func toggleIsPinned() {
-        self.isPinned.toggle()
     }
 }
 

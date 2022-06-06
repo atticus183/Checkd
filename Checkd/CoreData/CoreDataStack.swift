@@ -8,34 +8,20 @@
 import Combine
 import CoreData
 
-class CoreDataStack {
+final class CoreDataStack {
     static let shared = CoreDataStack()
 
     var contextDidChange = PassthroughSubject<Void, Error>()
 
-    var inMemory: Bool {
-        #if DEBUG
-        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
-            //Running in the preview
-            return true
-        } else if let _ = NSClassFromString("XCTest") {
-            //Running unit tests
-            return true
-        } else {
-            //Running in the simulator
-            return false
-        }
-        #else
-        //Running in production/release builds
-        return false
-        #endif
-    }
+    private(set) var inMemory: Bool
 
     private(set) var modelName: String = "Checkd"
 
     var viewContext: NSManagedObjectContext { container.viewContext }
 
-    private init() {
+    init(inMemory: Bool = false) {
+        self.inMemory = inMemory
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(didSave),

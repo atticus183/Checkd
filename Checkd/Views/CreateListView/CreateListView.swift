@@ -7,8 +7,15 @@
 
 import SwiftUI
 
+private enum Field: Int, Hashable {
+    case enterListName
+}
+
 struct CreateListView: View {
     @ObservedObject var viewModel: CreateListViewViewModel
+
+    @FocusState private var enterListField: Field?
+    @FocusState private var isEnterListFieldFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -16,6 +23,7 @@ struct CreateListView: View {
                 .font(.title)
                 .fontWeight(.bold)
             TextField("Please enter a list name", text: $viewModel.desiredListName)
+                .focused($isEnterListFieldFocused)
                 .textFieldStyle(.roundedBorder)
             Button(action: {
                 viewModel.addList()
@@ -30,6 +38,11 @@ struct CreateListView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isEnterListFieldFocused = true
+            }
+        }
     }
 }
 
