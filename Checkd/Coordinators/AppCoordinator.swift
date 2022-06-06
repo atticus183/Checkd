@@ -61,8 +61,8 @@ final class AppCoordinator: Coordinator {
     }
 
     /// A coordinator method to navigate to a `CreateListView`.
-    func goToCreateListView() {
-        let viewModel = CreateListViewViewModel()
+    func goToCreateListView(editingList: ListEntity?) {
+        let viewModel = CreateListViewViewModel(list: editingList)
         viewModel.coordinator = self
         let view = CreateListView(viewModel: viewModel)
         let hostingController = UIHostingController(rootView: view)

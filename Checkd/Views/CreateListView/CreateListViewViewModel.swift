@@ -15,17 +15,30 @@ final class CreateListViewViewModel: ObservableObject {
     /// The `Coordinator` for the view model.
     weak var coordinator: AppCoordinator?
 
+    /// A `Boolean` indicating a list was sent to make edits.
+    var isListBeingEdited: Bool { listBeingEdited != nil }
+
+    /// A `ListEntity` sent to make edits.
+    var listBeingEdited: ListEntity?
+
     /// The `Repository` for the view model.
     private(set) var listRepository: ListRepository
 
-    init(listRepository: ListRepository = DefaultListRepository()) {
+    init(listRepository: ListRepository = DefaultListRepository(), list: ListEntity? = nil) {
         self.listRepository = listRepository
+        self.listBeingEdited = list
+
+        desiredListName = listBeingEdited?.name ?? ""
     }
 
     /// A method to add a list via the repository `add` method.
-    func addList() {
+    func saveList() {
         guard !desiredListName.isEmpty else { return }
-        listRepository.add(name: desiredListName.trimmingCharacters(in: .whitespacesAndNewlines))
+        if let listBeingEdited = listBeingEdited {
+            listRepository.update(name: desiredListName, listEntity: listBeingEdited)
+        } else {
+            listRepository.add(name: desiredListName.trimmingCharacters(in: .whitespacesAndNewlines))
+        }
         coordinator?.dismiss()
     }
 }

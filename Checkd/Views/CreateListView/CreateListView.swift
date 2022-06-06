@@ -21,9 +21,10 @@ struct CreateListView: View {
                 .focused($isEnterListFieldFocused)
                 .textFieldStyle(.roundedBorder)
             Button(action: {
-                viewModel.addList()
+                viewModel.saveList()
             }, label: {
-                Label("Add List", systemImage: "list.dash")
+                let buttonTitle = viewModel.isListBeingEdited ? "Update List" : "Add List"
+                Label(buttonTitle, systemImage: "list.dash")
                     .padding()
                     .font(.system(size: 20, weight: .semibold, design: .default))
                     .foregroundColor(.white)

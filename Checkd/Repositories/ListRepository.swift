@@ -99,6 +99,7 @@ class DefaultListRepository: ListRepository {
     @discardableResult
     func update(name: String, listEntity: ListEntity) -> ListEntity {
         listEntity.name = name
+        coreDataStack.save()
         return listEntity
     }
 

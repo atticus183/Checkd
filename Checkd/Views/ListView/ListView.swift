@@ -17,6 +17,12 @@ struct ListView: View {
                 ForEach(viewModel.lists, id: \.id) { list in
                     ListRow(list: list) {
                         viewModel.coordinator?.goToTodoListView(list: list)
+                    }.swipeActions(edge: .leading) {
+                        Button {
+                            viewModel.coordinator?.goToCreateListView(editingList: list)
+                        } label: {
+                            Image(systemName: "pencil")
+                        }.tint(.orange)
                     }
                 }.onDelete { indexSet in
                     viewModel.deleteList(at: indexSet)
@@ -29,7 +35,7 @@ struct ListView: View {
             VStack {
                 Spacer()
                 AddButtonView {
-                    viewModel.coordinator?.goToCreateListView()
+                    viewModel.coordinator?.goToCreateListView(editingList: nil)
                 }.padding()
             }
         }

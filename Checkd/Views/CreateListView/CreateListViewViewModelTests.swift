@@ -28,7 +28,7 @@ class CreateListViewViewModelTests: XCTestCase {
     /// Ensures the view model adds the list via the repository `add` method.
     func testAddList() {
         subject.desiredListName = "Shopping"
-        subject.addList()
+        subject.saveList()
 
         let lists = mockRepository.fetchLists()
 
