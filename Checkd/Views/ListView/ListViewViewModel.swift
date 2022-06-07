@@ -30,11 +30,9 @@ final class ListViewViewModel: ObservableObject {
     }
 
     /// A method to delete a `ListEntity`.
-    func deleteList(at indexSet: IndexSet) {
-        for index in indexSet {
-            let list = lists[index]
-            listRepository.delete(listEntity: list)
-        }
+    /// - Parameter list: The list to delete.
+    func deleteList(list: ListEntity) {
+        listRepository.delete(listEntity: list)
     }
 
     /// A method to fetch all lists from the repository.
@@ -43,9 +41,10 @@ final class ListViewViewModel: ObservableObject {
     }
 
     /// A method to reorder a list.
-    func moveList(from indexSet: IndexSet, to destIndex: Int) {
-        guard let fromIndex = indexSet.last, lists.count > destIndex else { return }
-        let listBeingMoved = lists[fromIndex]
-        listRepository.move(list: listBeingMoved, to: destIndex, lists: lists)
+    /// - Parameters:
+    ///   - indexSet: The indexSet passed from the view's onMove action.
+    ///   - destination: The destination index of the list.
+    func moveList(from indexSet: IndexSet, to destination: Int) {
+        listRepository.moveList(from: indexSet, to: destination, lists: &lists)
     }
 }

@@ -36,9 +36,7 @@ class ListViewViewModelTests: XCTestCase {
         let lists = mockRepository.fetchLists()
         XCTAssertEqual(lists.count, 1)
 
-        let index = lists.firstIndex(where: { $0 === shoppingList })!
-        let indexSet = IndexSet(integer: index)
-        subject.deleteList(at: indexSet)
+        subject.deleteList(list: shoppingList)
 
         let lists2 = mockRepository.fetchLists()
         XCTAssertEqual(lists2.count, 0)
