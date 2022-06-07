@@ -17,8 +17,10 @@ protocol ListRepository: Repository {
     @discardableResult func add(name: String) -> ListEntity
 
     /// Deletes a `ListEntity`.
-    /// - Parameter listEntity: The list to delete.
-    func delete(listEntity: ListEntity)
+    /// - Parameters:
+    ///   - listEntity: The list to delete.
+    ///   - lists:A modifiable (`inout`) collection of lists.
+    func delete(listEntity: ListEntity, in lists: inout [ListEntity])
 
     /// Fetches all lists.
     /// - Returns: An array of `ListEntity`.
@@ -70,7 +72,13 @@ class DefaultListRepository: ListRepository {
         return list
     }
 
-    func delete(listEntity: ListEntity) {
+    func delete(listEntity: ListEntity, in lists: inout [ListEntity]) {
+        lists.removeAll(where: { $0 === listEntity })
+
+        for (index, list) in lists.enumerated() {
+            list.sortIndex = Int64(index)
+        }
+
         coreDataStack.viewContext.delete(listEntity)
         coreDataStack.save()
     }
