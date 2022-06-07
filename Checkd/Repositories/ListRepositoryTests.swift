@@ -49,12 +49,12 @@ class ListRepositoryTests: XCTestCase {
         let desiredListName = "Groceries"
         subject.add(name: desiredListName)
 
-        let allLists = subject.fetchLists()
+        var allLists = subject.fetchLists()
         let databaseList = allLists.first
 
         XCTAssertNotNil(databaseList)
 
-        subject.delete(listEntity: databaseList!)
+        subject.delete(listEntity: databaseList!, in: &allLists)
 
         let allLists2 = subject.fetchLists()
         XCTAssertEqual(allLists2.count, 0)
@@ -73,12 +73,12 @@ class ListRepositoryTests: XCTestCase {
 
         XCTAssertEqual(list.todoCount, 2)
 
-        let allLists = subject.fetchLists()
+        var allLists = subject.fetchLists()
         let databaseList = allLists.first
 
         XCTAssertNotNil(databaseList)
 
-        subject.delete(listEntity: databaseList!)
+        subject.delete(listEntity: databaseList!, in: &allLists)
 
         let allLists2 = subject.fetchLists()
         XCTAssertEqual(allLists2.count, 0)

@@ -32,7 +32,7 @@ final class ListViewViewModel: ObservableObject {
     /// A method to delete a `ListEntity`.
     /// - Parameter list: The list to delete.
     func deleteList(list: ListEntity) {
-        listRepository.delete(listEntity: list)
+        listRepository.delete(listEntity: list, in: &lists)
     }
 
     /// A method to fetch all lists from the repository.
