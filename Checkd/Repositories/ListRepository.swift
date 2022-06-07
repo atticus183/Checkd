@@ -26,10 +26,10 @@ protocol ListRepository: Repository {
 
     /// Reorders a `ListEntity`.
     /// - Parameters:
-    ///   - list: The list to move.
-    ///   - index: The destination index.
-    ///   - lists: The lists displayed.
-    func move(list: ListEntity, to index: Int, lists: [ListEntity])
+    ///   - indexSet: The index of the list prior to moving.
+    ///   - destination: The destination index.
+    ///   - lists: A modifiable (`inout`) collection of lists.
+    func moveList(from indexSet: IndexSet, to destination: Int, lists: inout [ListEntity])
 
     /// Updates a `ListEntity`.
     /// - Parameters:
@@ -86,13 +86,13 @@ class DefaultListRepository: ListRepository {
         }
     }
 
-    func move(list: ListEntity, to index: Int, lists: [ListEntity]) {
-        //Reassign lists below index
-        let listToReassign = lists.filter { $0.sortIndex >= index }
-        listToReassign.forEach { $0.sortIndex += 1 }
+    func moveList(from indexSet: IndexSet, to destination: Int, lists: inout [ListEntity]) {
+        lists.move(fromOffsets: indexSet, toOffset: destination)
 
-        //Reassign list being moved
-        list.sortIndex = Int64(index)
+        for (index, list) in lists.enumerated() {
+            list.sortIndex = Int64(index)
+        }
+
         coreDataStack.save()
     }
 
