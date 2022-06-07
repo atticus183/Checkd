@@ -18,14 +18,14 @@ struct ListView: View {
                     ListRow(list: list) {
                         viewModel.coordinator?.goToTodoListView(list: list)
                     }.swipeActions(edge: .leading) {
-                        Button {
+                        SwipeView(action: {
                             viewModel.coordinator?.goToCreateListView(editingList: list)
-                        } label: {
-                            Image(systemName: "pencil")
-                        }.tint(.orange)
+                        }, swipeViewType: .edit)
+                    }.swipeActions(edge: .trailing) {
+                        SwipeView(action: {
+                            viewModel.deleteList(list: list)
+                        }, swipeViewType: .delete)
                     }
-                }.onDelete { indexSet in
-                    viewModel.deleteList(at: indexSet)
                 }.onMove { indexSet, destination in
                     viewModel.moveList(from: indexSet, to: destination)
                 }
