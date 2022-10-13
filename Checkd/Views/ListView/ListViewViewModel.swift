@@ -23,10 +23,11 @@ final class ListViewViewModel: ObservableObject {
     init(listRepository: ListRepository = DefaultListRepository()) {
         self.listRepository = listRepository
 
-        listRepository.repositoryHasChanges
-            .sink(receiveCompletion: { _ in }) { [weak self] hasChanges in
-            self?.fetchLists()
-        }.store(in: &cancellables)
+        listRepository.allLists
+            .removeDuplicates()
+            .sink { [weak self] lists in
+                self?.lists = lists
+            }.store(in: &cancellables)
     }
 
     /// A method to delete a `ListEntity`.

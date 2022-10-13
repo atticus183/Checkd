@@ -11,6 +11,8 @@ import Foundation
 
 protocol ListRepository: Repository {
 
+    var allLists: CurrentValueSubject<[ListEntity], Never> { get }
+
     /// Adds a `ListEntity`.
     /// - Parameter name: The desired name of the list.
     /// - Returns: A successfully added `ListEntity`.
@@ -33,6 +35,8 @@ protocol ListRepository: Repository {
     ///   - lists: A modifiable (`inout`) collection of lists.
     func moveList(from indexSet: IndexSet, to destination: Int, lists: inout [ListEntity])
 
+    var publisherSubscription: AnyCancellable? { get set }
+
     /// Updates a `ListEntity`.
     /// - Parameters:
     ///   - name: The desired new name.
@@ -42,12 +46,16 @@ protocol ListRepository: Repository {
 }
 
 /// A concrete implementation of a `ListRepository`.
-class DefaultListRepository: ListRepository {
+class DefaultListRepository: ListRepository, ObservableObject {
+    let allLists = CurrentValueSubject<[ListEntity], Never>([])
+
     private var cancellables: Set<AnyCancellable> = []
+
+    var publisherSubscription: AnyCancellable?
 
     private(set) var coreDataStack: CoreDataStack
 
-    var repositoryHasChanges = PassthroughSubject<Bool, Error>()
+    let repositoryHasChanges = PassthroughSubject<Bool, Error>()
 
     init(coreDataStack: CoreDataStack = .shared) {
         self.coreDataStack = coreDataStack
@@ -56,6 +64,16 @@ class DefaultListRepository: ListRepository {
             .sink(receiveCompletion: { _ in }) { [weak self] _ in
                 self?.repositoryHasChanges.send(true)
             }.store(in: &cancellables)
+
+        publisherSubscription = CDPublisher(
+            request: ListEntity.request(),
+            context: coreDataStack.viewContext
+        )
+        .receive(on: DispatchQueue.main)
+        .sink(receiveCompletion: { _ in },
+              receiveValue: { [weak self] lists in
+            self?.allLists.send(lists)
+        })
     }
 
     @discardableResult

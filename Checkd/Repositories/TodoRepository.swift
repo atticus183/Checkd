@@ -15,7 +15,8 @@ protocol TodoRepository: Repository {
     ///   - name: The desired name of the todo.
     ///   - list: The list belonging to the todo.
     /// - Returns: A successfully added `TodoEntity`.
-    @discardableResult func add(name: String, to list: ListEntity) -> TodoEntity
+    @discardableResult
+    func add(name: String, to list: ListEntity) -> TodoEntity
 
     /// Deletes a `TodoEntity`.
     /// - Parameter todoEntity: The todo to delete.
@@ -39,7 +40,8 @@ protocol TodoRepository: Repository {
     ///   - name: The desired new name.
     ///   - todoEntity: The todo to update.
     /// - Returns: The updated todo.
-    @discardableResult func update(name: String, todoEntity: TodoEntity) -> TodoEntity
+    @discardableResult
+    func update(name: String, todoEntity: TodoEntity) -> TodoEntity
 }
 
 /// A concrete implementation of a `TodoRepository`.
@@ -48,7 +50,7 @@ class DefaultTodoRepository: TodoRepository {
 
     private(set) var coreDataStack: CoreDataStack
 
-    var repositoryHasChanges = PassthroughSubject<Bool, Error>()
+    let repositoryHasChanges = PassthroughSubject<Bool, Error>()
 
     init(coreDataStack: CoreDataStack = .shared) {
         self.coreDataStack = coreDataStack
