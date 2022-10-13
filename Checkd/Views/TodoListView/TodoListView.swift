@@ -40,7 +40,6 @@ struct TodoListView: View {
                         viewModel.deleteTodo(at: indexSet, inSection: 1)
                     }
                 }.headerProminence(.increased)
-
             }
             .listStyle(.insetGrouped)
         }.onAppear {
