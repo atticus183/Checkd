@@ -28,11 +28,15 @@ final class AppCoordinator: Coordinator {
     /// The `UIWindow` passed from `AppDelegate`.
     private(set) var window: UIWindow!
 
+    // MARK: - Initialization
+
     /// Initializes a concrete `Coordinator`.
     /// - Parameter window: The window of the application.
     init(window: UIWindow?) {
         self.window = window
     }
+
+    // MARK: - Methods
 
     /// The coordinator method that starts the application.
     func start() {
@@ -78,7 +82,7 @@ final class AppCoordinator: Coordinator {
     }
 }
 
-// MARK: UISplitViewControllerDelegate
+// MARK: - UISplitViewControllerDelegate
 
 extension AppCoordinator: UISplitViewControllerDelegate {
     func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {

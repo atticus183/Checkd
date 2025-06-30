@@ -20,6 +20,8 @@ final class ListViewViewModel: ObservableObject {
     /// The `Repository` for the view model.
     private(set) var listRepository: ListRepository
 
+    // MARK: - Initialization
+
     init(listRepository: ListRepository = DefaultListRepository()) {
         self.listRepository = listRepository
 
@@ -29,6 +31,8 @@ final class ListViewViewModel: ObservableObject {
                 self?.lists = lists
             }.store(in: &cancellables)
     }
+
+    // MARK: - Methods
 
     /// A method to delete a `ListEntity`.
     /// - Parameter list: The list to delete.
@@ -47,5 +51,15 @@ final class ListViewViewModel: ObservableObject {
     ///   - destination: The destination index of the list.
     func moveList(from indexSet: IndexSet, to destination: Int) {
         listRepository.moveList(from: indexSet, to: destination, lists: &lists)
+    }
+}
+
+extension ListViewViewModel {
+    static func createForPreview() -> ListViewViewModel {
+        let coreDataStack = CoreDataStack(inMemory: true)
+        ListEntity.createForPreview(coreDataStack: coreDataStack)
+        let repo = DefaultListRepository(coreDataStack: coreDataStack)
+
+        return ListViewViewModel(listRepository: repo)
     }
 }
