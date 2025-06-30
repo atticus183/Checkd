@@ -80,7 +80,7 @@ final class AppCoordinator: Coordinator {
 
 // MARK: UISplitViewControllerDelegate
 
-extension AppCoordinator : UISplitViewControllerDelegate {
+extension AppCoordinator: UISplitViewControllerDelegate {
     func splitViewController(_ svc: UISplitViewController, topColumnForCollapsingToProposedTopColumn proposedTopColumn: UISplitViewController.Column) -> UISplitViewController.Column {
         return .primary
     }

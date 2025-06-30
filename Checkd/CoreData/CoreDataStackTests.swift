@@ -5,9 +5,8 @@
 //  Created by Josh R on 6/5/22.
 //
 
-import XCTest
-
 @testable import Checkd
+import XCTest
 
 class CoreDataStackTests: XCTestCase {
     var subject: CoreDataStack!

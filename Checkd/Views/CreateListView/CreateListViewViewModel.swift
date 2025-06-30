@@ -26,7 +26,7 @@ final class CreateListViewViewModel: ObservableObject {
 
     init(listRepository: ListRepository = DefaultListRepository(), list: ListEntity? = nil) {
         self.listRepository = listRepository
-        self.listBeingEdited = list
+        listBeingEdited = list
 
         desiredListName = listBeingEdited?.name ?? ""
     }
@@ -34,7 +34,7 @@ final class CreateListViewViewModel: ObservableObject {
     /// A method to add a list via the repository `add` method.
     func saveList() {
         guard !desiredListName.isEmpty else { return }
-        if let listBeingEdited = listBeingEdited {
+        if let listBeingEdited {
             listRepository.update(name: desiredListName, listEntity: listBeingEdited)
         } else {
             listRepository.add(name: desiredListName.trimmingCharacters(in: .whitespacesAndNewlines))

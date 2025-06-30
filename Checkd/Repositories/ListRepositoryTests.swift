@@ -5,9 +5,8 @@
 //  Created by Josh R on 6/5/22.
 //
 
-import XCTest
-
 @testable import Checkd
+import XCTest
 
 class ListRepositoryTests: XCTestCase {
     var mockTodoRepository: MockTodoRepository!
@@ -83,7 +82,7 @@ class ListRepositoryTests: XCTestCase {
         let allLists2 = subject.fetchLists()
         XCTAssertEqual(allLists2.count, 0)
 
-        //Ensure todos associated with the deleted list also delete.
+        // Ensure todos associated with the deleted list also delete.
         let allTodos = mockTodoRepository.fetchAllTodos()
         XCTAssertEqual(allTodos.count, 0)
     }

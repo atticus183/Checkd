@@ -105,5 +105,4 @@ class CDPublisher<Entity>: NSObject, NSFetchedResultsControllerDelegate, Publish
             fetchPublisher = nil
         }
     }
-
 }

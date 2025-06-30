@@ -25,7 +25,7 @@ extension ListEntity {
 
     /// A collection of sorted todos with the most recent first.
     var sortedTodos: [TodoEntity] {
-        guard let sortedTodos = self.todos?
+        guard let sortedTodos = todos?
             .compactMap({ $0 as? TodoEntity })
             .sorted(by: { $0.dateCreated ?? Date() > $1.dateCreated ?? Date() }) else { return [] }
 

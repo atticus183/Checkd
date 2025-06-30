@@ -44,7 +44,7 @@ struct ListView: View {
                 EditButton()
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())   //fixes console errors
+        .navigationViewStyle(StackNavigationViewStyle()) // fixes console errors
         .onAppear {
             viewModel.fetchLists()
         }
