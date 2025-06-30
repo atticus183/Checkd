@@ -14,7 +14,7 @@ extension TodoEntity {
     /// - Returns: A `NSFetchRequest` of type `TodoEntity`.
     static func request(in list: ListEntity?) -> NSFetchRequest<TodoEntity> {
         let request: NSFetchRequest<TodoEntity> = TodoEntity.fetchRequest()
-        if let list = list {
+        if let list {
             let predicate = NSPredicate(format: "list == %@", list)
             request.predicate = predicate
         }
@@ -28,7 +28,7 @@ extension TodoEntity {
 
     /// The date created represented as a string in the format MM-DD-YYYY.
     var dateCreatedString: String {
-        dateFormatter.string(from: self.dateCreated ?? Date())
+        dateFormatter.string(from: dateCreated ?? Date())
     }
 
     /// The `DateFormatter` for a `TodoEntity`.
@@ -40,6 +40,6 @@ extension TodoEntity {
 
     /// Toggles the completion state of a `TodoEntity`.
     func toggleIsDone() {
-        self.isCompleted.toggle()
+        isCompleted.toggle()
     }
 }

@@ -102,11 +102,11 @@ class DefaultTodoRepository: TodoRepository {
     }
 
     func toggleStatus(todoEntity: TodoEntity) {
-        //Change from Complete to Not Done
+        // Change from Complete to Not Done
         if todoEntity.isCompleted {
             todoEntity.dateCompleted = nil
         } else {
-            //Mark Complete
+            // Mark Complete
             todoEntity.dateCompleted = Date()
         }
 
@@ -120,5 +120,4 @@ class DefaultTodoRepository: TodoRepository {
         coreDataStack.save()
         return todoEntity
     }
-
 }

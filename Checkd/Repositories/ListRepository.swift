@@ -128,5 +128,4 @@ class DefaultListRepository: ListRepository, ObservableObject {
         coreDataStack.save()
         return listEntity
     }
-
 }

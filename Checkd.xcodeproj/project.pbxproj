@@ -6,6 +6,10 @@
 	objectVersion = 70;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5750AE522E123D3600DE40E0 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = 5750AE512E123D3600DE40E0 /* SwiftFormat */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		571B7B0C284ABC73006BAEEB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -64,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5750AE522E123D3600DE40E0 /* SwiftFormat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +168,9 @@
 				Base,
 			);
 			mainGroup = 571B7AED284ABC71006BAEEB;
+			packageReferences = (
+				5750AE502E123D3600DE40E0 /* XCRemoteSwiftPackageReference "SwiftFormat" */,
+			);
 			productRefGroup = 571B7AF7284ABC71006BAEEB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -459,6 +467,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5750AE502E123D3600DE40E0 /* XCRemoteSwiftPackageReference "SwiftFormat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicklockwood/SwiftFormat.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.56.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5750AE512E123D3600DE40E0 /* SwiftFormat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5750AE502E123D3600DE40E0 /* XCRemoteSwiftPackageReference "SwiftFormat" */;
+			productName = SwiftFormat;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 571B7AEE284ABC71006BAEEB /* Project object */;
 }

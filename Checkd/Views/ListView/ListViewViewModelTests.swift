@@ -5,9 +5,8 @@
 //  Created by Josh R on 6/5/22.
 //
 
-import XCTest
-
 @testable import Checkd
+import XCTest
 
 class ListViewViewModelTests: XCTestCase {
     var mockRepository: MockListRepository!
@@ -76,7 +75,7 @@ class ListViewViewModelTests: XCTestCase {
         let movedList = subject.lists.first(where: { $0.name == "Car" })
         XCTAssertEqual(movedList?.sortIndex, 0)
 
-        //Ensure initial first item is now second
+        // Ensure initial first item is now second
         let movedList2 = subject.lists.first(where: { $0.name == "Shopping" })
         XCTAssertEqual(movedList2?.sortIndex, 1)
     }

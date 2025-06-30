@@ -39,7 +39,7 @@ final class TodoListViewViewModel: ObservableObject {
 
     /// A method to add a todo via the repository `add` method.
     func addTodo() {
-        guard !enteredText.isEmpty, let list = list else { return }
+        guard !enteredText.isEmpty, let list else { return }
         todoRepository.add(name: enteredText, to: list)
         enteredText.removeAll()
     }
@@ -57,7 +57,7 @@ final class TodoListViewViewModel: ObservableObject {
 
     /// Fetches todos from repository.
     func fetchTodos() {
-        guard let list = list else { return }
+        guard let list else { return }
         let allListTodos = todoRepository.fetchTodos(in: list)
         activeTodos = allListTodos.filter { !$0.isCompleted }
         completedTodos = allListTodos.filter { $0.isCompleted }
