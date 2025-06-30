@@ -42,11 +42,6 @@ struct CreateListView: View {
     }
 }
 
-// MARK: SwiftUI Preview
-
-struct CreateListView_Previews: PreviewProvider {
-    static var previews: some View {
-        let vm = CreateListViewViewModel()
-        return CreateListView(viewModel: vm)
-    }
+#Preview {
+    CreateListView(viewModel: .init())
 }

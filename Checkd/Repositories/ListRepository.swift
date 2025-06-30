@@ -57,6 +57,8 @@ class DefaultListRepository: ListRepository, ObservableObject {
 
     let repositoryHasChanges = PassthroughSubject<Bool, Error>()
 
+    // MARK: - Initialization
+
     init(coreDataStack: CoreDataStack = .shared) {
         self.coreDataStack = coreDataStack
 
@@ -75,6 +77,8 @@ class DefaultListRepository: ListRepository, ObservableObject {
             self?.allLists.send(lists)
         })
     }
+
+    // MARK: - Methods
 
     @discardableResult
     func add(name: String) -> ListEntity {

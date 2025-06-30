@@ -24,12 +24,16 @@ final class CreateListViewViewModel: ObservableObject {
     /// The `Repository` for the view model.
     private(set) var listRepository: ListRepository
 
+    // MARK: - Initialization
+
     init(listRepository: ListRepository = DefaultListRepository(), list: ListEntity? = nil) {
         self.listRepository = listRepository
         listBeingEdited = list
 
         desiredListName = listBeingEdited?.name ?? ""
     }
+
+    // MARK: - Methods
 
     /// A method to add a list via the repository `add` method.
     func saveList() {

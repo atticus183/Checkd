@@ -98,23 +98,9 @@ struct TodoRow: View {
     }
 }
 
-// MARK: SwiftUI Preview
-
-struct TodoListView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        let coreDataStack = CoreDataStack(inMemory: true)
-        let lists = ListEntity.createForPreview(coreDataStack: coreDataStack)
-        let repo = DefaultTodoRepository(coreDataStack: coreDataStack)
-        let listToShow = lists.first(where: { $0.name == "Groceries" })
-        let vm = TodoListViewViewModel(
-            list: listToShow,
-            todoRepository: repo
-        )
-
-        return NavigationView {
-            TodoListView(viewModel: vm)
-                .navigationTitle(listToShow!.name!)
-        }
+#Preview {
+    NavigationView {
+        TodoListView(viewModel: .createForPreview())
+            .navigationTitle("Groceries")
     }
 }

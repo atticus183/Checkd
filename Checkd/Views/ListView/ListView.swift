@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ListView: View {
     @ObservedObject var viewModel: ListViewViewModel
-    @State private var showingCreateListView = false
 
     var body: some View {
         ZStack {
@@ -44,7 +43,7 @@ struct ListView: View {
                 EditButton()
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // fixes console errors
+        .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             viewModel.fetchLists()
         }
@@ -70,18 +69,9 @@ struct ListRow: View {
     }
 }
 
-// MARK: SwiftUI Preview
-
-struct ListView_Previews: PreviewProvider {
-    static var previews: some View {
-        let coreDataStack = CoreDataStack(inMemory: true)
-        ListEntity.createForPreview(coreDataStack: coreDataStack)
-        let repo = DefaultListRepository(coreDataStack: coreDataStack)
-        let vm = ListViewViewModel(listRepository: repo)
-
-        return NavigationView {
-            ListView(viewModel: vm)
-                .navigationTitle("Lists")
-        }
+#Preview {
+    NavigationView {
+        ListView(viewModel: .createForPreview())
+            .navigationTitle("Lists")
     }
 }

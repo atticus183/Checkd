@@ -52,6 +52,8 @@ class DefaultTodoRepository: TodoRepository {
 
     let repositoryHasChanges = PassthroughSubject<Bool, Error>()
 
+    // MARK: - Initialization
+
     init(coreDataStack: CoreDataStack = .shared) {
         self.coreDataStack = coreDataStack
 
@@ -60,6 +62,8 @@ class DefaultTodoRepository: TodoRepository {
                 self?.repositoryHasChanges.send(true)
             }.store(in: &cancellables)
     }
+
+    // MARK: - Methods
 
     @discardableResult
     func add(name: String, to list: ListEntity) -> TodoEntity {

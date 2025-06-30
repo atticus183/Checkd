@@ -10,8 +10,8 @@ import SwiftUI
 
 /// The view model for a `TodoListView`.
 final class TodoListViewViewModel: ObservableObject {
-    @Published var activeTodos: [TodoEntity] = []
-    @Published var completedTodos: [TodoEntity] = []
+    @Published private(set) var activeTodos: [TodoEntity] = []
+    @Published private(set) var completedTodos: [TodoEntity] = []
     @Published var enteredText: String = ""
 
     private var cancellables: Set<AnyCancellable> = []
@@ -27,6 +27,8 @@ final class TodoListViewViewModel: ObservableObject {
     /// The `Repository` for the view model.
     private(set) var todoRepository: TodoRepository
 
+    // MARK: - Initialization
+
     init(list: ListEntity?, todoRepository: TodoRepository = DefaultTodoRepository()) {
         self.list = list
         self.todoRepository = todoRepository
@@ -36,6 +38,8 @@ final class TodoListViewViewModel: ObservableObject {
             self?.fetchTodos()
         }.store(in: &cancellables)
     }
+
+    // MARK: - Methods
 
     /// A method to add a todo via the repository `add` method.
     func addTodo() {
@@ -66,5 +70,19 @@ final class TodoListViewViewModel: ObservableObject {
     /// Toggles the status of a todo.
     func toggleTodoStatus(todo: TodoEntity) {
         todoRepository.toggleStatus(todoEntity: todo)
+    }
+}
+
+extension TodoListViewViewModel {
+    static func createForPreview() -> TodoListViewViewModel {
+        let coreDataStack = CoreDataStack(inMemory: true)
+        let lists = ListEntity.createForPreview(coreDataStack: coreDataStack)
+        let repo = DefaultTodoRepository(coreDataStack: coreDataStack)
+        let listToShow = lists.first(where: { $0.name == "Groceries" })
+
+        return TodoListViewViewModel(
+            list: listToShow,
+            todoRepository: repo
+        )
     }
 }

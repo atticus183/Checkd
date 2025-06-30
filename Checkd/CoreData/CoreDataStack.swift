@@ -8,7 +8,7 @@
 import Combine
 import CoreData
 
-/// The Core Data object for the application.
+/// The Core Data stack for the application.
 final class CoreDataStack {
     static let shared = CoreDataStack()
 
@@ -25,6 +25,8 @@ final class CoreDataStack {
     /// The view context of the `NSPersistentContainer`.
     var viewContext: NSManagedObjectContext { container.viewContext }
 
+    // MARK: - Initialization
+
     /// Initializes a `CoreDataStack`.
     /// - Parameter inMemory: Determines if the store should be in memory.
     init(inMemory: Bool = false) {
@@ -38,7 +40,7 @@ final class CoreDataStack {
         )
     }
 
-    // MARK: NSPersistentContainer
+    // MARK: - NSPersistentContainer
 
     /// The `NSPersistentContainer` of the application.
     lazy var container: NSPersistentContainer = {
@@ -55,6 +57,8 @@ final class CoreDataStack {
         })
         return container
     }()
+
+    // MARK: - Methods
 
     @objc func didSave() {
         contextDidChange.send(())
